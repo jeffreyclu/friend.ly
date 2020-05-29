@@ -1,47 +1,55 @@
-div.signupForm {
-  animation: flyBottom 1s 1;
+div.Form {
+  margin-top: 8rem;
+  animation: appear 1s 1;
   font-family: $mainFont;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-  line-height: 10rem;
-}
-
-label.signupLabel {
-  font-size: $signupLabelFontSize;
-  color: $keylimepearl;
-}
-
-input.signupName {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid $pear;
-  font-size: $signupLabelFontSize;
-  outline: none;
-  width: auto;
-  color: $pear;
-  font-family: $titleFont;
-  margin: 0 2rem 0 2rem;
-}
-
-select.signupInterest {
-  font-family: $titleFont;
-  background-color: transparent;
-  font-size: $signupLabelFontSize;
-  border: none;
-  outline: none;
-  color: $pear;
-  margin: 0 2rem 0 2rem;
-  option {
+  line-height: 6rem;
+  div.signupRow {
+    flex: 1 1 auto;
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  label {
+    font-size: $signupLabelFontSize;
+    color: $keylimepearl;
+    margin: 0;
+  }
+  input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid $pear;
+    font-size: $signupLabelFontSize;
+    outline: none;
+    width: auto;
+    color: $pear;
     font-family: $titleFont;
-    background-color: $tundora;
+    margin: 0 2rem 0 2rem;
+  }
+  select {
+    width: auto;
+    font-family: $titleFont;
+    background-color: transparent;
+    font-size: $signupLabelFontSize;
+    border: none;
+    outline: none;
+    color: $pear;
+    margin: 0 2rem 0 2rem;
+    option {
+      font-family: $titleFont;
+      background-color: $tundora;
+    }
   }
 }
 
+#signupFormBottom {
+  animation: appear 1s 1;
+}
 
 div.formBtns {
-  margin-top: 5vh;
+  margin-top: 4rem;
   display: flex;
   flex-flow: column nowrap;
   line-height: 4rem;
@@ -78,7 +86,7 @@ div.formBtns {
   }
 }
 
-@keyframes flyBottom {
+@keyframes appear {
   0% { opacity: 0; }
   100% { opacity: 100; }
 }
