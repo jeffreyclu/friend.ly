@@ -1,18 +1,48 @@
 body {
   background-color: $tundora;
+  background-image: url(/client/assets/img/vishnu-r-nair-m1WZS5ye404-unsplash.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   padding: 0;
   margin: 0;
   display: flex;
   flex-flow: column nowrap;
-  align-items: center;
   justify-content: center;
+  animation: changeBg 60s infinite;
 }
 
-h1 {
+div.logo {
   position: absolute;
-  top: 1vh;
-  font-family: $titleFont;
-  font-size: $titleFontSize;
-  text-align: center;
-  color: $pear;
+  top: 0;
+  width: 100vw;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    font-family: $titleFont;
+    font-size: $titleFontSize;
+    text-align: center;
+    color: $pear;
+    margin: 0;
+  }
+  
+  span.subtitle {
+    font-family: $mainFont;
+    margin-top: -1rem;
+    font-size: 2rem;
+    color: $cerulean;
+  }
+}
+
+@keyframes changeBg
+{
+  0%   {background-image: url(/client/assets/img/vishnu-r-nair-m1WZS5ye404-unsplash.jpg);}
+  17%  {background-image: url(/client/assets/img/filip-mroz--WgTWXb4nh4-unsplash.jpg);}
+  34%  {background-image: url(/client/assets/img/charlotte-coneybeer-JcJSeL3RmBY-unsplash.jpg);}
+  51%  {background-image: url(/client/assets/img/ardian-lumi-6Woj_wozqmA-unsplash.jpg);}
+  68%  {background-image: url(/client/assets/img/jake-hills-23LET4Hxj_U-unsplash.jpg);}
+  85%  {background-image: url(/client/assets/img/sarah-ardin-xmeWpE6aDW4-unsplash.jpg);}
 }

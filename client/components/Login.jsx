@@ -1,17 +1,21 @@
 import React from 'react';
 
-const Login = () => {
+const Login = ({ toggleLogin }) => {
   console.log('sup');
   return (
     <div className="loginForm">
-      <label>
+      <label className="loginLabel">
         Username:
-        <input type="text" />
+        <input type="text" className="loginUsername" />
       </label>
-      <label>
+      <label className="loginLabel">
         Password:
-        <input type="text" />
+        <input type="password" className="loginPassword" />
       </label>
+      <div className="formBtns">
+        <button className="signupBtn">Login</button>
+        <a onClick={ toggleLogin }>Signup Instead</a>
+      </div>
     </div>
   );
 };

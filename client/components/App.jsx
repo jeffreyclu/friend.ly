@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
+import Logo from './Logo.jsx';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       login: false,
+      signupFull: false,
     };
     this.toggleLogin = this.toggleLogin.bind(this);
   }
@@ -22,9 +24,10 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Logo />
         {this.state.login
-          ? <Login />
-          : <Signup toggleLogin={this.toggleLogin}/>}
+          ? <Login toggleLogin={this.toggleLogin} />
+          : <Signup toggleLogin={this.toggleLogin} signupFull={this.state.signupFull} />}
       </div>
     );
   }

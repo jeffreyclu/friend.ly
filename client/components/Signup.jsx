@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-const Signup = ({ toggleLogin }) => {
+const Signup = ({ toggleLogin, signupFull }) => {
+  const user = {};
   return (
     <div className="signupForm">
       <label className="signupLabel">
@@ -18,9 +19,9 @@ const Signup = ({ toggleLogin }) => {
           <option value="6">Eating Out</option>
         </select>
       </label>
-      <div className="signupBtns">
+      <div className="formBtns">
         <button className="signupBtn">Signup</button>
-        <button className="signupBtn" onClick={ toggleLogin }>Login</button>
+        <a onClick={ toggleLogin }>Login Instead</a>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 div.signupForm {
-  font-family: $signupMainFont;
+  font-family: $mainFont;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -26,30 +26,31 @@ input.signupName {
 
 select.signupInterest {
   font-family: $titleFont;
-  background-color: $tundora;
+  background-color: transparent;
   font-size: $signupLabelFontSize;
   border: none;
   outline: none;
   color: $pear;
   margin: 0 2rem 0 2rem;
+  option {
+    font-family: $titleFont;
+    background-color: $tundora;
+  }
 }
 
-select.signupInterest option {
-  background-color: $tundora;
-  font-family: $titleFont;
-}
 
-div.signupBtns {
+div.formBtns {
   margin-top: 5vh;
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column nowrap;
   line-height: 4rem;
   justify-content: center;
-  width: 55vw;
+  align-items: center;
   button {
+    flex: 0 0 auto;
     margin-bottom: 4rem;
     color: $pear;
-    font-family: $signupMainFont;
+    font-family: $mainFont;
     font-size: $signupBtnFontSize;
     font-weight: 800;
     background: none;
@@ -63,6 +64,14 @@ div.signupBtns {
       transform: translateY(0.5rem);
       box-shadow: 0px 1.5rem 0px $cerulean;
       border: 1px solid $cerulean;
+      color: $cerulean;
+    }
+  }
+  a {
+    font-family: $mainFont;
+    font-size: $mainFontSize;
+    color: $pear;
+    &:hover {
       color: $cerulean;
     }
   }

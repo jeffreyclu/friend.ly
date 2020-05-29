@@ -1,0 +1,23 @@
+div.loginForm {
+    font-family: $mainFont;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    line-height: 10rem;
+    label.loginLabel {
+        font-size: $signupLabelFontSize;
+        color: $keylimepearl;
+    }
+    input {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid $pear;
+        font-size: $signupLabelFontSize;
+        outline: none;
+        width: auto;
+        color: $pear;
+        font-family: $titleFont;
+        margin: 0 2rem 0 2rem;
+    }
+  }
