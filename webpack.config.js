@@ -5,7 +5,7 @@ module.exports = () => {
   return {
     mode: process.env.NODE_ENV,
     entry: {
-      main: './client/index.js',
+      main: './client/index.jsx',
     },
     output: {
       publicPath: '/build/',
