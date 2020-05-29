@@ -4,16 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server/server.js",
-    "dev": "nodemon server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "env NODE_ENV=production node server/server.js",
+    "build": "env NODE_ENV=production webpack",
+    "dev": "env NODE_ENV=development webpack-dev-server --open & nodemon server/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jeffreyclu/friend.ly.git"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Jeffrey Lu",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jeffreyclu/friend.ly/issues"
@@ -29,6 +28,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.1",
     "@babel/preset-env": "^7.10.1",
+    "@babel/preset-react": "^7.10.1",
     "babel-loader": "^8.1.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
