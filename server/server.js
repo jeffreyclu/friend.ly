@@ -5,9 +5,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use('/build', express.static(path.join(__dirname, '../build')));
+app.use('/client', express.static(path.join(__dirname, '../client')));
 
 app.get('/', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../index.html'));
+});
+
+app.get('/dashboard', (req, res) => {
+  res.status(200).sendFile(path.join(__dirname, '../dashboard.html'));
 });
 
 app.get('*', (req, res) => {

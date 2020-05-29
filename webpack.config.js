@@ -6,20 +6,24 @@ module.exports = () => {
   return {
     mode: process.env.NODE_ENV,
     entry: {
-      main: './client/index.jsx',
+      index: './client/index.jsx',
+      dashboard: './client/dashboard.jsx'
     },
     output: {
       publicPath: '/build/',
-      filename: 'bundle.js',
+      filename: '[name].bundle.js',
       path: path.resolve(__dirname, 'build'),
     },
     devServer: {
       publicPath: '/build',
+      proxy: {
+        '/dashboard': 'http://localhost:3000',
+      },
       hot: true,
     },
     plugins: [
       new MiniCssExtractPlugin({
-        filename: 'main.css',
+        filename: '[name].css',
       }),
     ],
     module: {
