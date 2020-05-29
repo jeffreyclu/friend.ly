@@ -1,0 +1,18 @@
+body {
+  background-color: $tundora;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  position: absolute;
+  top: 1vh;
+  font-family: $titleFont;
+  font-size: $titleFontSize;
+  text-align: center;
+  color: $pear;
+}
