@@ -18,6 +18,7 @@ module.exports = () => {
       publicPath: '/build',
       proxy: {
         '/dashboard': 'http://localhost:3000',
+        '/api': 'http://localhost:3000',
       },
       hot: true,
     },

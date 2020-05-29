@@ -13,12 +13,15 @@ mongoose.connect(MONGO_URI, {
 const { Schema } = mongoose;
 
 const usersSchema = new Schema({
-  name: String,
-  age: Number,
-  gender: String,
-  city: String,
-  primary_interest: String,
-  secondary_interest: String,
+  name: { type: String, required: true },
+  age: { type: Number, required: true },
+  gender: { type: String, required: true },
+  city: { type: String, required: true },
+  primary_interest: { type: String, required: true },
+  secondary_interest: { type: String, required: false },
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+  email: { type: String, required: true },
 });
 
 const User = mongoose.model('users', usersSchema);

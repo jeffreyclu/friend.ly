@@ -1,10 +1,24 @@
-const models = require('../models/friendlyModels');
+const  User = require('../models/friendlyModels');
 
 const usersController = {};
 
-usersController.addCharacter = (req, res, next) => {
-  models.User.create(req.body)
+usersController.getUsers = (req, res, next) => {
+  console.log('here');
+  User.find()
+    .exec()
     .then((resp) => {
+      console.log(resp);
+      res.locals.users = resp;
+      next();
+    })
+    .catch(next);
+};
+
+usersController.addUser = (req, res, next) => {
+  console.log('here');
+  User.create(req.body)
+    .then((resp) => {
+      console.log(resp);
       res.locals.user = resp;
       next();
     })
