@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import DashboardApp from './components/DashboardApp.jsx';
+import DashboardContainer from './components/DashboardContainer.jsx';
 
 import styles from './scss/dashboard.scss';
 
-render(<DashboardApp />, document.getElementById('root2'));
+render(<DashboardContainer />, document.getElementById('root2'));

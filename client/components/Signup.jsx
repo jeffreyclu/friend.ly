@@ -1,30 +1,38 @@
 import React from 'react';
 import SignupFull from './SignupFull.jsx';
 
-const Signup = ({ toggleLogin, toggleSignupFull, signupFull }) => {
+const Signup = (props) => {
+  const {
+    toggleLogin,
+    toggleSignupFull,
+    signupFull,
+    setNewUser,
+    validateWarning,
+  } = props;
   return (
     <div id="signupForm" className="form">
       <div id="signupFormStart">
         <div className="formRow">
           <label>
             My name is:
-            <input id="name" type="text" className="signupName" />      
+            <input id="name" type="text" className="signupName" onChange={setNewUser} />
           </label>
         </div>
         <div className="formRow">
           <label>
             and I love:
-            <select id="primaryInterest">
-              <option value="1">Live Music</option>
-              <option value="2">Live Sports</option>
-              <option value="3">Art Shows</option>
-              <option value="4">Dancing</option>
-              <option value="5">Watching Movies</option>
-              <option value="6">Eating Out</option>
+            <select id="primary_interest" onChange={setNewUser}>
+              <option value="Live Music">Live Music</option>
+              <option value="Live Sports">Live Sports</option>
+              <option value="Art Shows">Art Shows</option>
+              <option value="Dancing">Dancing</option>
+              <option value="Watching Movies">Watching Movies</option>
+              <option value="Eating Out">Eating Out</option>
             </select>
           </label>
         </div>
-        {signupFull && <SignupFull />}
+        {signupFull && <SignupFull setNewUser={setNewUser} />}
+        {validateWarning && <span className="validateWarning">Error: all fields must be filled in.</span>}
       </div>
 
       <div className="formBtns">

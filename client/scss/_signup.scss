@@ -1,5 +1,5 @@
 div.Form {
-  margin-top: 8rem;
+  margin-top: 6rem;
   animation: appear 1s 1;
   font-family: $mainFont;
   display: flex;
@@ -57,7 +57,6 @@ div.formBtns {
   align-items: center;
   button {
     flex: 0 0 auto;
-    margin-bottom: 4rem;
     color: $pear;
     font-family: $mainFont;
     font-size: $signupBtnFontSize;
@@ -78,7 +77,7 @@ div.formBtns {
   }
   a {
     font-family: $mainFont;
-    font-size: $mainFontSize;
+    font-size: $smallerFontSize;
     color: $pear;
     &:hover {
       color: $cerulean;

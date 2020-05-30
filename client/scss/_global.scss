@@ -8,7 +8,8 @@ body {
   margin: 0;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: center;
   animation: changeBg 60s infinite;
 }
 
@@ -31,6 +32,7 @@ div.logo {
     font-family: $mainFont;
     margin-top: -1rem;
     font-size: 2rem;
+    font-weight: 700;
     color: $cerulean;
     animation: flyRight 1s 1;
   }

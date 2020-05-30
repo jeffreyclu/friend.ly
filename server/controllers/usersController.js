@@ -15,12 +15,25 @@ usersController.getUsers = (req, res, next) => {
 };
 
 usersController.addUser = (req, res, next) => {
-  console.log('here');
   User.create(req.body)
     .then((resp) => {
-      console.log(resp);
-      res.locals.user = resp;
+      console.log('user created', resp);
+      res.locals.userCreated = true;
       next();
+    })
+    .catch(next);
+};
+
+usersController.checkUsername = (req, res, next) => {
+  console.log('validating user');
+  User.find({ username: req.body.username })
+    .then((resp) => {
+      if (resp.length === 0) {
+        res.locals.newUser = req.body;
+        next();
+      } else {
+        res.json(false);
+      }
     })
     .catch(next);
 };
