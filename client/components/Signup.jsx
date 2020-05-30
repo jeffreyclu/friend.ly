@@ -32,9 +32,9 @@ const Signup = (props) => {
           </label>
         </div>
         {signupFull && <SignupFull setNewUser={setNewUser} />}
-        {validateWarning && <span className="validateWarning">Error: all fields must be filled in.</span>}
+        
       </div>
-
+      {validateWarning && <span className="warning">Error: all fields must be filled in.</span>}
       <div className="formBtns">
         <button id="signupBtn" onClick={toggleSignupFull}>
           Signup

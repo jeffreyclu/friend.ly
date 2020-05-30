@@ -13,7 +13,7 @@ body {
   animation: changeBg 60s infinite;
 }
 
-div.Form {
+.Form {
   margin-top: 6rem;
   animation: appear 1s 1;
   font-family: $mainFont;
@@ -67,7 +67,7 @@ div.formBtns {
   margin-top: 4rem;
   display: flex;
   flex-flow: column nowrap;
-  line-height: 4rem;
+  line-height: 8rem;
   justify-content: center;
   align-items: center;
   button {

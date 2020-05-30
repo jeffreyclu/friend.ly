@@ -7,4 +7,5 @@ const sessionSchema = new Schema({
   createdAt: { type: Date, expires: 30, default: Date.now },
 });
 
-module.exports = mongoose.model('sessions', sessionSchema);
+const Session = mongoose.model('sessions', sessionSchema);
+module.exports = Session;
