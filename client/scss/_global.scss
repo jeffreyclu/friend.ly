@@ -1,16 +1,14 @@
 body {
-  background-color: $tundora;
-  background-image: url(/client/assets/img/vishnu-r-nair-m1WZS5ye404-unsplash.jpg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  background-color: $black;
   padding: 0;
   margin: 0;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
-  animation: changeBg 60s infinite;
+  font-family: $mainFont;
+  font-size: $mainFontSize;
+  color: $keylimepearl;
 }
 
 div.logo {

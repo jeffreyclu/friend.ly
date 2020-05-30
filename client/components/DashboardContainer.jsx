@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DashboardApp from './DashboardApp.jsx';
+import Logo from "./Logo.jsx";
 
 class DashboardContainer extends Component {
   constructor(props) {
@@ -29,9 +30,14 @@ class DashboardContainer extends Component {
   render() {
     return (
       <div>
-        {this.state.fetchedUsers
-          ? <DashboardApp />
-          : <h1>Loading...</h1>}
+        <Logo />
+        {this.state.fetchedUsers ? (
+          <DashboardApp />
+        ) : (
+          <div className="dashboard">
+            <span>Loading...</span>
+          </div>
+        )}
       </div>
     );
   }

@@ -1,0 +1,18 @@
+ body {
+   background-color: $tundora;
+   background-image: url(/client/assets/img/deva-darshan-4NZ-Q_uuKl8-unsplash.jpg);
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+ } 
+
+div.dashboard {
+  margin-top: 6rem;
+  animation: appear 1s 1;
+  font-family: $mainFont;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  line-height: 6rem;
+}

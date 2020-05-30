@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import User from './User.jsx';
-import Logo from './Logo.jsx';
 
 class DashboardApp extends Component {
   constructor(props) {
@@ -12,8 +11,7 @@ class DashboardApp extends Component {
 
   render() {
     return (
-      <div>
-        <Logo />
+      <div className="dashboard">
         <User />
       </div>
     );
