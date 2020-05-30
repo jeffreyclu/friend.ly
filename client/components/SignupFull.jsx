@@ -23,10 +23,7 @@ const SignupFull = ({ setNewUser }) => {
       <div className="formRow">
         <label>
           City:
-          <select id="city" onChange={setNewUser}>
-            <option value="New York City">New York City</option>
-            <option value="Los Angeles">Los Angeles</option>
-          </select>
+          <input id="city" type="text" onChange={setNewUser} />
         </label>
       </div>
       <div className="formRow">

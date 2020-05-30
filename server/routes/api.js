@@ -10,9 +10,10 @@ router.get('/getusers',
   (req, res) => res.status(200).json(res.locals.users));
 
 router.post('/adduser',
-  cookieController.setSSIDCookie,
   usersController.checkUsername,
   usersController.addUser,
+  cookieController.setSSIDCookie,
+  // sessionController.addSession, // TODO FIX THIS
   (req, res) => res.status(200).json(res.locals.userCreated));
 
 module.exports = router;

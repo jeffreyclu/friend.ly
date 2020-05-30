@@ -67,10 +67,9 @@ class App extends Component {
         signupFull, validatedSignupForm, validateWarning, newUser,
       } = prevState;
       if (!Object.values(newUser).some((val) => val === undefined)) {
-        console.log('validated');
         validatedSignupForm = true;
         if (signupFull && validatedSignupForm) {
-          console.log('here for real');
+          newUser.username = newUser.username.toLowerCase();
           fetch('/api/adduser', {
             method: 'POST',
             headers: {
@@ -84,12 +83,11 @@ class App extends Component {
               if (data === true) {
                 window.location.href = '/dashboard';
               } else {
-                alert('Error, user exists');
+                alert('Error, user already exists');
               }
             });
         }
       } else if (signupFull && Object.values(newUser).some((val) => val === undefined)) {
-        console.log('hereeee');
         validateWarning = true;
       }
       signupFull = true;
