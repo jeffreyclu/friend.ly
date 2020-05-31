@@ -34,8 +34,22 @@ app.post(
   },
 );
 
-app.get('/dashboard', (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, '../dashboard.html'));
+app.get(
+  '/dashboard',
+  sessionController.isLoggedIn,
+  (req, res) => {
+    if (res.locals.session === true) {
+      res.status(200).sendFile(path.join(__dirname, '../dashboard.html'));
+    } else {
+      res.redirect('/');
+    }
+});
+
+app.get(
+  '/logout',
+  cookieController.logout,
+  (req, res) => {
+    res.redirect('/');
 });
 
 app.get('*', (req, res) => {

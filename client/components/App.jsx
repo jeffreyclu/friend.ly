@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
 import Logo from './Logo.jsx';
+import Navbar from './Navbar.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -39,7 +39,6 @@ class App extends Component {
     this.setState((prevState) => {
       const newUser = { ...prevState.newUser };
       newUser[id] = value;
-      console.log(newUser);
       return { newUser };
     });
   }
@@ -79,11 +78,10 @@ class App extends Component {
           })
             .then((resp) => resp.json())
             .then((data) => {
-              console.log(data);
               if (data === true) {
                 window.location.href = '/dashboard';
               } else {
-                alert('Error, user already exists');
+                alert('Error, user already exists'); // TODO fix error message handling
               }
             });
         }
@@ -99,6 +97,7 @@ class App extends Component {
     this.setState((prevState) => {
       let { loginValues, loginMessage } = prevState;
       if (loginValues.username && loginValues.password) {
+        loginValues.username = loginValues.username.toLowerCase();
         fetch('/login', {
           method: 'POST',
           headers: {
@@ -113,7 +112,7 @@ class App extends Component {
             }
           });
       }
-      loginMessage = 'Error, please try again.';
+      loginMessage = 'Error, please try again.'; // TODO fix login error message handling
       return { loginMessage };
     });
   }
@@ -121,6 +120,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <Logo />
         {this.state.login ? (
           <Login

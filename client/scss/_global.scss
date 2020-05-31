@@ -40,6 +40,14 @@ span.warning {
   color: red;
 }
 
+nav {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 10rem;
+  background-color: black;
+}
+
 @keyframes changeBg
 {
   0%   {background-image: url(/client/assets/img/vishnu-r-nair-m1WZS5ye404-unsplash.jpg);}

@@ -4,30 +4,34 @@ const Session = require('../models/sessionModel');
 
 const usersController = {};
 
+// TODO do something with the list of users
 usersController.getUsers = (req, res, next) => {
-  console.log('here');
-  User.find()
-    .exec()
-    .then((resp) => {
-      console.log(resp);
-      res.locals.users = resp;
-      next();
-    })
-    .catch(next);
+  if (res.locals.session === true) {
+    User.find()
+      .exec()
+      .then((resp) => {
+        res.locals.users = resp;
+        next();
+      })
+      .catch(next);
+  } else {
+    next(); // TODO add "please login" page
+  }
 };
 
 usersController.addUser = (req, res, next) => {
   User.create(req.body)
     .then((resp) => {
-      console.log('user created', resp);
+      const ssid = resp._id;
+      res.locals.userId = ssid;
       res.locals.userCreated = true;
+      Session.create({ cookieId: ssid });
       next();
     })
     .catch(next);
 };
 
 usersController.checkUsername = (req, res, next) => {
-  console.log('validating user');
   User.find({ username: req.body.username })
     .exec()
     .then((resp) => {
@@ -43,7 +47,6 @@ usersController.checkUsername = (req, res, next) => {
 
 usersController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
-  console.log(username, password);
   User.find({ username })
     .exec()
     .then((resp) => {
@@ -58,7 +61,7 @@ usersController.verifyUser = (req, res, next) => {
             const ssid = resp[0]._doc._id;
             res.locals.userId = ssid;
             res.locals.result = { message: 'user found' };
-            Session.create({ cookieId: ssid })
+            Session.create({ cookieId: ssid });
           }
           next();
         });

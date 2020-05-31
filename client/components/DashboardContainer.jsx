@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DashboardApp from './DashboardApp.jsx';
 import Logo from "./Logo.jsx";
+import Navbar from './Navbar.jsx';
 
 class DashboardContainer extends Component {
   constructor(props) {
@@ -30,6 +31,7 @@ class DashboardContainer extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <Logo />
         {this.state.fetchedUsers ? (
           <DashboardApp />

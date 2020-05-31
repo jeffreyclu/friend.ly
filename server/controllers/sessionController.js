@@ -12,10 +12,10 @@ sessionController.isLoggedIn = (req, res, next) => {
 };
 
 // TODO FIX THIS
-// sessionController.addSession = (req, res, next) => {
-//   Session.create({ cookieId: res.locals.userId })
-//     .then(next)
-//     .catch(next);
-// };
+sessionController.addSession = (req, res, next) => {
+  Session.create({ cookieId: res.locals.userId })
+    .then(next)
+    .catch(next);
+};
 
 module.exports = sessionController;
