@@ -20,8 +20,12 @@ app.use('/build', express.static(path.join(__dirname, '../build')));
 app.use('/client', express.static(path.join(__dirname, '../client')));
 app.use('/api', apiRouter);
 
-app.get('/', (req, res) => {
-  res.status(200).sendFile(path.join(__dirname, '../index.html'));
+app.get(
+  '/',
+  sessionController.isLoggedIn,
+  (req, res) => {
+    if (res.locals.session === true) res.redirect('/dashboard');
+    else res.status(200).sendFile(path.join(__dirname, '../index.html'));
 });
 
 app.post(
@@ -50,6 +54,13 @@ app.get(
   cookieController.logout,
   (req, res) => {
     res.redirect('/');
+});
+
+app.get(
+  '/checklogin',
+  sessionController.isLoggedIn,
+  (req, res) => {
+    res.send(res.locals.session);
 });
 
 app.get('*', (req, res) => {

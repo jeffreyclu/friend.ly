@@ -16,6 +16,7 @@ div.logo {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
+  margin-top: 4rem;
 
   h1 {
     font-family: $titleFont;
@@ -44,8 +45,47 @@ nav {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 10rem;
-  background-color: black;
+  height: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  div.section {
+    margin: 1rem 4rem 0;
+    display: flex;
+    flex-flow: row nowrap;
+  }
+  div.profile {
+    background: url(../assets/icons/noun_profile_665436.svg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  div.dropdown {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+  a {
+    font-size: $smallerFontSize;
+    color: $razzmatazz;
+    margin: 0 1rem 0;
+    &:hover {
+      color: $cerulean;
+    }
+  }
+  span.logo {
+    font-family: $titleFont;
+    font-size: $logoFontSize;
+    color: $pear;
+    line-height: 3.5rem;
+  }
+}
+
+
+a {
+  text-decoration: none;
 }
 
 @keyframes changeBg

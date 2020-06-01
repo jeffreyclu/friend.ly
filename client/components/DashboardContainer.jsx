@@ -9,6 +9,7 @@ class DashboardContainer extends Component {
     this.state = {
       users: [],
       fetchedUsers: false,
+      loggedIn: true,
     };
   }
 
@@ -31,7 +32,7 @@ class DashboardContainer extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar loggedIn={this.state.loggedIn} />
         <Logo />
         {this.state.fetchedUsers ? (
           <DashboardApp />

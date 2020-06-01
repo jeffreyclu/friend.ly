@@ -9,6 +9,7 @@ class App extends Component {
     super(props);
     this.state = {
       login: false,
+      loggedIn: false,
       signupFull: false,
       validatedSignupForm: false,
       validateWarning: false,
@@ -32,6 +33,19 @@ class App extends Component {
     this.setNewUser = this.setNewUser.bind(this);
     this.setLogin = this.setLogin.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  componentDidMount() {
+    fetch('/checklogin')
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data === true) {
+          this.setState(() => {
+            const loggedIn = true;
+            return { loggedIn };
+          });
+        }
+      });
   }
 
   setNewUser(e) {
@@ -120,7 +134,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
         <Logo />
         {this.state.login ? (
           <Login

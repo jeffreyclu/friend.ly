@@ -1,25 +1,23 @@
 import React, { Component } from 'react';
+import NavbarDropdown from './NavbarDropdown.jsx';
+import NavbarLoggedIn from './NavbarLoggedIn.jsx';
+import NavbarLoggedOut from './NavbarLoggedOut.jsx';
 
-class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    };
-  }
-
-  render() {
-    return (
-      <>
-        <nav className="navbar">
-          <a href='/'>Home</a>
-          <a href='/dashboard'>Dashboard</a>
-          <a>Profile</a>
-          <a href='/logout'>Logout</a>
-        </nav>
-      </>
-    );
-  }
+const Navbar = ({ toggleLogin, loggedIn}) => {
+  return (
+    <>
+      <nav className="navbar">
+        <div className="section">
+          <a href="/"><span className="logo">F</span></a>
+        </div>
+        {
+          loggedIn === true
+            ? <NavbarLoggedIn />
+            : <NavbarLoggedOut toggleLogin={toggleLogin} />
+        }
+      </nav>
+    </>
+  );
 }
 
 export default Navbar;
