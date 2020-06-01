@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import DashboardApp from './DashboardApp.jsx';
-import Logo from "./Logo.jsx";
-import Navbar from './Navbar.jsx';
+import Logo from './Logo.jsx';
+import NavbarLoggedIn from './NavbarLoggedIn.jsx';
 
 class DashboardContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [],
+      users: [], // TODO do something with these users
       fetchedUsers: false,
-      loggedIn: true,
     };
   }
 
@@ -32,7 +31,7 @@ class DashboardContainer extends Component {
   render() {
     return (
       <div>
-        <Navbar loggedIn={this.state.loggedIn} />
+        <NavbarLoggedIn />
         <Logo />
         {this.state.fetchedUsers ? (
           <DashboardApp />

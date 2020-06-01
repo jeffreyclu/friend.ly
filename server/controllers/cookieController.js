@@ -1,5 +1,3 @@
-const Session = require('../models/sessionModel');
-
 const cookieController = {};
 
 cookieController.setSSIDCookie = (req, res, next) => {

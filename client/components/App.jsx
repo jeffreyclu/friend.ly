@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
 import Logo from './Logo.jsx';
-import Navbar from './Navbar.jsx';
+import NavbarLoggedOut from './NavbarLoggedOut.jsx';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      login: false,
-      loggedIn: false,
+      loginToggle: false,
       signupFull: false,
       validatedSignupForm: false,
       validateWarning: false,
@@ -35,19 +34,6 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
   }
 
-  componentDidMount() {
-    fetch('/checklogin')
-      .then((resp) => resp.json())
-      .then((data) => {
-        if (data === true) {
-          this.setState(() => {
-            const loggedIn = true;
-            return { loggedIn };
-          });
-        }
-      });
-  }
-
   setNewUser(e) {
     const { id, value } = e.target;
     this.setState((prevState) => {
@@ -68,9 +54,9 @@ class App extends Component {
 
   toggleLogin() {
     this.setState((prevState) => {
-      let login = { ...prevState.login };
-      login = !prevState.login;
-      return { login };
+      let { loginToggle } = prevState;
+      loginToggle = !loginToggle;
+      return { loginToggle };
     });
   }
 
@@ -134,9 +120,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar toggleLogin={this.toggleLogin} loggedIn={this.state.loggedIn} />
+        <NavbarLoggedOut toggleLogin={this.toggleLogin} loginToggle={this.state.loginToggle} />
         <Logo />
-        {this.state.login ? (
+        {this.state.loginToggle ? (
           <Login
             toggleLogin={this.toggleLogin}
             setLogin={this.setLogin}
