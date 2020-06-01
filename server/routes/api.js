@@ -15,5 +15,10 @@ router.post('/adduser',
   usersController.addUser,
   cookieController.setSSIDCookie,
   (req, res) => res.status(200).json(res.locals.userCreated));
+  
+router.get('/matchusers',
+  usersController.getCurrentUser,
+  usersController.matchUsers,
+  (req, res) => res.status(200).json(res.locals.matchedUsers));
 
 module.exports = router;

@@ -7,7 +7,8 @@ class DashboardContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: [], // TODO do something with these users
+      matchedUsers: [], // TODO do something with these users
+      matchedUserIndex: 0,
       user: {},
       fetchedUsers: false,
     };
@@ -21,12 +22,13 @@ class DashboardContainer extends Component {
           user: data.currentUser,
         });
       });
-    fetch('/api/getusers')
+    fetch('/api/matchusers')
       .then((res) => res.json())
-      .then((users) => {
-        if (!Array.isArray(users)) users = [];
+      .then((matchedUsers) => {
+        console.log(matchedUsers)
+        if (!Array.isArray(matchedUsers)) matchedUsers = [];
         return this.setState({
-          users,
+          matchedUsers,
           fetchedUsers: true,
         });
       })
@@ -43,7 +45,7 @@ class DashboardContainer extends Component {
         <NavbarLoggedIn />
         <Logo />
         {this.state.fetchedUsers ? (
-          <DashboardApp user={this.state.user} />
+          <DashboardApp user={this.state.user} matchedUsers={this.state.matchedUsers} matchedUserIndex={this.state.matchedUserIndex} />
         ) : (
           <div className="dashboard">
             <span>Loading...</span>

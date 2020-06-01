@@ -81,4 +81,19 @@ usersController.getCurrentUser = (req, res, next) => {
     .catch(next);
 };
 
+usersController.matchUsers = (req, res, next) => {
+  const user = res.locals.currentUser;
+  if (user) {
+    User.find({ city: user.city, primary_interest: user.primary_interest })
+      .then((resp) => {
+        if (resp) {
+          const matchedUsers = resp.filter(match=>match.username !== user.username)
+          res.locals.matchedUsers = matchedUsers;
+        }
+        next();
+      })
+      .catch(next);
+  }
+};
+
 module.exports = usersController;
