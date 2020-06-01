@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
 import User from './User.jsx';
 
-class DashboardApp extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      
-    };
-  }
-
-  render() {
-    return (
-      <div className="dashboard">
-        <User />
-      </div>
-    );
-  }
+const DashboardApp = ({ user }) => {
+  return (
+    <div className="dashboard">
+      <User user={user} />
+    </div>
+  );
 }
 
 export default DashboardApp;

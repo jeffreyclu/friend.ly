@@ -59,8 +59,9 @@ app.get(
 app.get(
   '/checklogin',
   sessionController.isLoggedIn,
+  usersController.getCurrentUser,
   (req, res) => {
-    res.send(res.locals.session);
+    res.send({ currentSession: res.locals.session, currentUser: res.locals.currentUser });
 });
 
 app.get('*', (req, res) => {

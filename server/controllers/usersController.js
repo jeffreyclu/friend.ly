@@ -70,4 +70,15 @@ usersController.verifyUser = (req, res, next) => {
     .catch(next);
 };
 
+usersController.getCurrentUser = (req, res, next) => {
+  const userId = req.cookies.ssid;
+  User.findOne({ _id: userId })
+    .exec()
+    .then((resp)=>{
+      if (resp) res.locals.currentUser = resp;
+      next();
+    })
+    .catch(next);
+};
+
 module.exports = usersController;

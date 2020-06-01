@@ -5,7 +5,7 @@ const NavbarLoggedIn = () => {
     <>
       <nav className="navbar">
         <div className="section">
-          <a href="/"><span className="logo">F</span></a>
+          <a href="/" className="logo">F</a>
         </div>
         <div className="section">
           <a href="/dashboard">Dashboard</a>

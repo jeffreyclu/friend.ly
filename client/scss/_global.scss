@@ -67,19 +67,21 @@ nav {
     display: flex;
     flex-flow: column nowrap;
   }
+  a.logo {
+    font-family: $titleFont;
+    font-size: $logoFontSize;
+    color: $pear;
+    line-height: 3.5rem;
+    animation: spin 10s infinite;
+  }
   a {
     font-size: $smallerFontSize;
     color: $razzmatazz;
     margin: 0 1rem 0;
     &:hover {
       color: $cerulean;
+      transform: scale(1.2);
     }
-  }
-  span.logo {
-    font-family: $titleFont;
-    font-size: $logoFontSize;
-    color: $pear;
-    line-height: 3.5rem;
   }
 }
 
@@ -106,4 +108,13 @@ a {
 @keyframes flyRight {
   0% { transform: translateX(100px); }
   100% { transform: translateX(0px); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  5% { transform: rotate(20deg) scale(1.25); }
+  8% { transform: rotate(0deg); }
+  9% { transform: rotate(10deg); }
+  10% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
 }

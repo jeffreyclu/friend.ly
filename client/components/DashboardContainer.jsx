@@ -8,11 +8,19 @@ class DashboardContainer extends Component {
     super(props);
     this.state = {
       users: [], // TODO do something with these users
+      user: {},
       fetchedUsers: false,
     };
   }
 
   componentDidMount() {
+    fetch('/checklogin')
+      .then((res) => res.json())
+      .then((data) => {
+        return this.setState({
+          user: data.currentUser,
+        });
+      });
     fetch('/api/getusers')
       .then((res) => res.json())
       .then((users) => {
@@ -26,6 +34,7 @@ class DashboardContainer extends Component {
         'DashboardApp.componentDidMount: get users: ERROR: ',
         err,
       ));
+    this.setState()
   }
 
   render() {
@@ -34,7 +43,7 @@ class DashboardContainer extends Component {
         <NavbarLoggedIn />
         <Logo />
         {this.state.fetchedUsers ? (
-          <DashboardApp />
+          <DashboardApp user={this.state.user} />
         ) : (
           <div className="dashboard">
             <span>Loading...</span>
