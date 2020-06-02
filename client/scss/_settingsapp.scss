@@ -1,0 +1,10 @@
+div.settings {
+  margin-top: 6rem;
+  animation: appear 1s 1;
+  font-family: $mainFont;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  line-height: 6rem;
+}

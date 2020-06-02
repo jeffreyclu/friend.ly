@@ -26,7 +26,8 @@ app.get(
   (req, res) => {
     if (res.locals.session === true) res.redirect('/dashboard');
     else res.status(200).sendFile(path.join(__dirname, '../index.html'));
-});
+  },
+);
 
 app.post(
   '/login',
@@ -47,14 +48,28 @@ app.get(
     } else {
       res.redirect('/');
     }
-});
+  },
+);
+
+app.get(
+  '/settings',
+  sessionController.isLoggedIn,
+  (req, res) => {
+    if (res.locals.session === true) {
+      res.status(200).sendFile(path.join(__dirname, '../settings.html'));
+    } else {
+      res.redirect('/');
+    }
+  },
+);
 
 app.get(
   '/logout',
   cookieController.logout,
   (req, res) => {
     res.redirect('/');
-});
+  },
+);
 
 app.get(
   '/checklogin',
@@ -62,7 +77,8 @@ app.get(
   usersController.getCurrentUser,
   (req, res) => {
     res.send({ currentSession: res.locals.session, currentUser: res.locals.currentUser });
-});
+  },
+);
 
 app.get('*', (req, res) => {
   res.sendStatus(404);

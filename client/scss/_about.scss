@@ -1,0 +1,12 @@
+#about {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-top: 10rem;
+  padding: 0 25vw 10vh;
+
+  h2 {
+    align-self: center;
+  }
+}

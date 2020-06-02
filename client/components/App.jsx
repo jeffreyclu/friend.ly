@@ -3,6 +3,7 @@ import Signup from './Signup.jsx';
 import Login from './Login.jsx';
 import Logo from './Logo.jsx';
 import NavbarLoggedOut from './NavbarLoggedOut.jsx';
+import AboutSection from './AboutSection.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -27,11 +28,14 @@ class App extends Component {
       },
       loginMessage: undefined,
     };
+    this.focusDiv = React.createRef();
+
     this.toggleLogin = this.toggleLogin.bind(this);
     this.toggleSignupFull = this.toggleSignupFull.bind(this);
     this.setNewUser = this.setNewUser.bind(this);
     this.setLogin = this.setLogin.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
+    this.scrollToAbout = this.scrollToAbout.bind(this);
   }
 
   setNewUser(e) {
@@ -117,10 +121,21 @@ class App extends Component {
     });
   }
 
+  scrollToAbout(e) {
+    this.focusDiv.current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+    });
+  }
+
   render() {
     return (
       <div>
-        <NavbarLoggedOut toggleLogin={this.toggleLogin} loginToggle={this.state.loginToggle} />
+        <NavbarLoggedOut
+          toggleLogin={this.toggleLogin}
+          loginToggle={this.state.loginToggle}
+          scrollToAbout={this.scrollToAbout}
+        />
         <Logo />
         {this.state.loginToggle ? (
           <Login
@@ -138,6 +153,9 @@ class App extends Component {
             validateWarning={this.state.validateWarning}
           />
         )}
+        <AboutSection
+          focusDiv={this.focusDiv}
+        />
       </div>
     );
   }

@@ -7,7 +7,8 @@ module.exports = () => {
     mode: process.env.NODE_ENV,
     entry: {
       index: './client/index.jsx',
-      dashboard: './client/dashboard.jsx'
+      dashboard: './client/dashboard.jsx',
+      settings: './client/settings.jsx',
     },
     output: {
       publicPath: '/build/',
@@ -18,6 +19,7 @@ module.exports = () => {
       publicPath: '/build',
       proxy: {
         '/dashboard': 'http://localhost:3000',
+        '/settings': 'http://localhost:3000',
         '/api': 'http://localhost:3000',
         '/login': 'http://localhost:3000',
         '/logout': 'http://localhost:3000',

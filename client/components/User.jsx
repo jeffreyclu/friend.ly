@@ -3,9 +3,8 @@ import React from 'react'
 const User = ({ matchedUsers, matchedUserIndex }) => {
   const currentMatch = matchedUsers[matchedUserIndex];
   const { name, age, gender, city, primary_interest } = currentMatch;
-  // TODO check matched users is > 0
   // TODO add ability to swipe left and right
-  // TODO separate current user card and matched user cards
+  // TODO add avatars
   return (
     <div className="matchedUserContainer">
       <div className="matchedUser">

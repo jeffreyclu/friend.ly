@@ -24,6 +24,7 @@ const usersSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   email: { type: String, required: false },
+  avatar: { type: String, required: false },
   potentialMatches: { type: Array, required: false },
   matchedUsers: { type: Array, required: false },
   conversations: { type: Array, required: false },
