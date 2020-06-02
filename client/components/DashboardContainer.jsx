@@ -17,15 +17,13 @@ class DashboardContainer extends Component {
   componentDidMount() {
     fetch('/checklogin')
       .then((res) => res.json())
-      .then((data) => {
-        return this.setState({
-          user: data.currentUser,
-        });
-      });
+      .then((data) => this.setState({
+        user: data.currentUser,
+      }));
     fetch('/api/matchusers')
       .then((res) => res.json())
       .then((matchedUsers) => {
-        console.log(matchedUsers)
+        console.log(matchedUsers);
         if (!Array.isArray(matchedUsers)) matchedUsers = [];
         return this.setState({
           matchedUsers,
@@ -36,16 +34,19 @@ class DashboardContainer extends Component {
         'DashboardApp.componentDidMount: get users: ERROR: ',
         err,
       ));
-    this.setState()
+    this.setState();
   }
 
   render() {
     return (
       <div>
         <NavbarLoggedIn />
-        <Logo />
         {this.state.fetchedUsers ? (
-          <DashboardApp user={this.state.user} matchedUsers={this.state.matchedUsers} matchedUserIndex={this.state.matchedUserIndex} />
+          <DashboardApp
+            user={this.state.user}
+            matchedUsers={this.state.matchedUsers}
+            matchedUserIndex={this.state.matchedUserIndex}
+          />
         ) : (
           <div className="dashboard">
             <span>Loading...</span>

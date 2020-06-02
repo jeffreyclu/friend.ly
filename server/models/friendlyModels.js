@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const MONGO_URI = 'mongodb+srv://jeffb:jeffb2020!@cluster0-cfqng.mongodb.net/test?retryWrites=true&w=majority';
-const SALT_WORK_FACTOR = 10;
+const SALT_WORK_FACTOR = 10; // TODO dotenv node package - makes a .env that doesn't get uploaded to github. manual upload to production server
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
@@ -24,6 +24,9 @@ const usersSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   email: { type: String, required: false },
+  potentialMatches: { type: Array, required: false },
+  matchedUsers: { type: Array, required: false },
+  conversations: { type: Array, required: false },
 });
 
 usersSchema.pre("save", function (next) {

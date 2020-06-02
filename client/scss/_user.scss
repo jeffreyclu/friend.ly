@@ -1,7 +1,105 @@
-div.userContainer {
-  border: 1px solid white;
-  img {
-    width: 400px;
-    height: 400px;
+div.matchedUserContainer {
+  width: 600px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+  margin: 0;
+  div.matchedUser {
+    animation: smallspin 10s infinite;
+    background-color: $white;
+    div.avatar {
+      background-image: url(../assets/avatars/ayo-ogunseinde-6W4F62sN_yI-unsplash.jpg);
+      background-size: cover;
+      background-position: center;
+      width: 600px;
+      height: 600px;
+    }
+    div.matchedHeader {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      border-bottom: 1px solid $lightgrey;
+      flex: 1 1 auto;
+      width: 100%;
+      height: 8rem;
+      span.matchedUserName {
+        margin: 0;
+        padding: 0rem 2rem 0rem;
+        font-family: $titleFont;
+        font-size: $largerFontSize;
+        color: $cerulean;
+        line-height: 3.5rem;
+      }
+      span.matchedCity {
+        margin: 0;
+        padding: 0rem 2rem 0rem;
+        font-size: $smallerFontSize;
+        font-weight: 600;
+        line-height: 3rem;
+        color: $lightgrey;
+      }
+    }
+    div.matchedDesc {
+      position: relative;
+      flex: 1 1 auto;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      font-size: $smallerFontSize;
+      color: $tundora;
+      line-height: 2.5rem;
+      height: 10rem;
+      p {
+        padding: 0rem 1rem 0rem;
+      }
+    }
   }
+  .arrow {
+    position: absolute;
+    top: 30%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    // background-color: rgba(255, 255, 255, 0.1);
+    width: 100px;
+    height: 100px;
+    font-family: $titleFont;
+    font-size: $mainFontSize;
+    display: flex;
+    align-items: center;
+    margin: 0 -10rem 0;
+    // animation: spin 10s infinite;
+    transition: transform 0.5s;
+  }
+  .right {
+    right: 0;
+    color: $razzmatazz;
+    background-image: url(../assets/icons/next.svg);
+    justify-content: flex-end;
+    &:hover {
+      transform: translateX(1rem);
+    }
+  }
+  .left {
+    left: 0;
+    color: $pear;
+    background-image: url(../assets/icons/left-arrow.svg);
+    justify-content: flex-start;
+    &:hover {
+      transform: translateX(-1rem);
+    }
+  }
+}
+
+@keyframes smallspin {
+  0% { transform: rotate(0deg); }
+  5% { transform: rotate(3deg); }
+  8% { transform: rotate(0deg); }
+  9% { transform: rotate(1deg); }
+  10% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
 }

@@ -61,7 +61,7 @@ usersController.verifyUser = (req, res, next) => {
             const ssid = resp[0]._doc._id;
             res.locals.userId = ssid;
             res.locals.result = { message: 'user found' };
-            Session.create({ cookieId: ssid });
+            Session.create({ cookieId: ssid, testKey: "hello world!" });
           }
           next();
         });
