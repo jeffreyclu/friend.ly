@@ -34,6 +34,23 @@ usersController.addUser = (req, res, next) => {
     .catch(next);
 };
 
+usersController.editUser = (req, res, next) => {
+  User.findOneAndUpdate(
+    { _id: req.body.user._id }, 
+    { 
+      city: req.body.newUser.city,
+      primary_interest: req.body.newUser.primary_interest,
+      potentialMatches: [],
+     })
+     .exec()
+     .then((resp) => {
+       console.log(resp);
+       res.locals.result = { message: 'success' };
+       next();
+     })
+     .catch(next);
+}
+
 usersController.checkUsername = (req, res, next) => {
   User.find({ username: req.body.username })
     .exec()

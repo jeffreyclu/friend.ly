@@ -116,7 +116,9 @@ class App extends Component {
             }
           });
       }
-      // loginMessage = 'Error, please try again.'; // TODO fix login error message handling
+      else {
+        loginMessage = 'Error, please try again.'; // TODO fix login error message handling
+      }
       return { loginMessage };
     });
   }

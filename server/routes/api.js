@@ -16,6 +16,11 @@ router.post('/adduser',
   cookieController.setSSIDCookie,
   (req, res) => res.status(200).json(res.locals.userCreated));
 
+router.post('/edituser',
+  sessionController.isLoggedIn,
+  usersController.editUser,
+  (req, res) => res.status(200).json(res.locals.result));
+
 router.get('/getpotentials',
   usersController.getCurrentUser,
   usersController.getPotentials,

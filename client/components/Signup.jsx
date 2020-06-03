@@ -11,11 +11,11 @@ const Signup = (props) => {
   } = props;
   return (
     <div id="signupForm" className="form">
-      <div id="signupFormStart">
+      <div>
         <div className="formRow">
           <label>
             My name is:
-            <input id="name" type="text" className="signupName" onChange={setNewUser} />
+            <input id="name" type="text" onChange={setNewUser} />
           </label>
         </div>
         <div className="formRow">

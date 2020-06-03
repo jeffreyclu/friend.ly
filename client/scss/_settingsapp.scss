@@ -1,4 +1,4 @@
-div.settings {
+div.settingsForm {
   margin-top: 6rem;
   animation: appear 1s 1;
   font-family: $mainFont;
@@ -6,5 +6,76 @@ div.settings {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
-  line-height: 6rem;
+  line-height: 4rem;
+  label {
+    font-size: $mainFontSize;
+  }
+  span.previous {
+    font-family: $titleFont;
+  }
+  .previous {
+    color: $darkgreen;
+  }
+  input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid $pear;
+    font-size: $mainFontSize;
+    outline: none;
+    width: auto;
+    color: $pear;
+    font-family: $titleFont;
+    margin: 0 2rem 0 2rem;
+  }
+  select {
+    width: auto;
+    font-family: $titleFont;
+    background-color: transparent;
+    font-size: $mainFontSize;
+    border: none;
+    outline: none;
+    color: $pear;
+    margin: 0 2rem 0 2rem;
+    option {
+      font-family: $titleFont;
+      background-color: $tundora;
+    }
+  }
+}
+
+div.settingsFormBtns {
+  margin-top: 4rem;
+  display: flex;
+  flex-flow: column nowrap;
+  line-height: 8rem;
+  justify-content: center;
+  align-items: center;
+  button {
+    flex: 0 0 auto;
+    color: $pear;
+    font-family: $mainFont;
+    font-size: $mainFontSize;
+    font-weight: 800;
+    background: none;
+    border: 1px solid $pear;
+    border-radius: 1rem;
+    padding: 1rem 3rem 1rem;
+    outline: none;
+    box-shadow: 0px 1rem 0px $pear;
+    transition: transform 0.2s, box-shadow 0.2s;
+    &:hover {
+      transform: translateY(0.25rem);
+      box-shadow: 0px 0.75rem 0px $cerulean;
+      border: 1px solid $cerulean;
+      color: $cerulean;
+    }
+  }
+  a {
+    font-family: $mainFont;
+    font-size: $smallerFontSize;
+    color: $pear;
+    &:hover {
+      color: $cerulean;
+    }
+  }
 }
