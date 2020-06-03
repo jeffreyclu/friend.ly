@@ -9,6 +9,7 @@ module.exports = () => {
       index: './client/index.jsx',
       dashboard: './client/dashboard.jsx',
       settings: './client/settings.jsx',
+      chatroom: './client/chatroom.jsx',
     },
     output: {
       publicPath: '/build/',
@@ -20,6 +21,7 @@ module.exports = () => {
       proxy: {
         '/dashboard': 'http://localhost:3000',
         '/settings': 'http://localhost:3000',
+        '/chatroom': 'http://localhost:3000',
         '/api': 'http://localhost:3000',
         '/login': 'http://localhost:3000',
         '/logout': 'http://localhost:3000',

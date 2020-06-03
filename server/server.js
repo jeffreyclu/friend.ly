@@ -64,6 +64,18 @@ app.get(
 );
 
 app.get(
+  '/chatroom',
+  sessionController.isLoggedIn,
+  (req, res) => {
+    if (res.locals.session === true) {
+      res.status(200).sendFile(path.join(__dirname, '../chatroom.html'));
+    } else {
+      res.redirect('/');
+    }
+  }
+)
+
+app.get(
   '/logout',
   cookieController.logout,
   (req, res) => {
