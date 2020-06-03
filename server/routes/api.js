@@ -15,10 +15,28 @@ router.post('/adduser',
   usersController.addUser,
   cookieController.setSSIDCookie,
   (req, res) => res.status(200).json(res.locals.userCreated));
-  
-router.get('/matchusers',
+
+router.get('/getpotentials',
   usersController.getCurrentUser,
-  usersController.matchUsers,
-  (req, res) => res.status(200).json(res.locals.matchedUsers));
+  usersController.getPotentials,
+  usersController.addPotentialMatches,
+  (req, res) => {
+    res.status(200).json(res.locals.potentialMatches);
+  });
+
+router.post('/syncpotentials',
+  usersController.getCurrentUser,
+  usersController.syncPotentialMatches,
+  (req, res) => {
+    res.status(200).send(res.locals.result);
+  });
+
+router.post('/addmatch',
+  usersController.getCurrentUser,
+  usersController.addMatch,
+  (req, res) => {
+    res.status(200).send(res.locals.result);
+  });
+
 
 module.exports = router;

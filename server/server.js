@@ -76,7 +76,13 @@ app.get(
   sessionController.isLoggedIn,
   usersController.getCurrentUser,
   (req, res) => {
-    res.send({ currentSession: res.locals.session, currentUser: res.locals.currentUser });
+    res.send({ currentSession: res.locals.session, currentUser: res.locals.currentUser, matchedUsers: res.locals.matchedUsers, potentialMatches: res.locals.potentialMatches });
+  },
+);
+
+app.get('/addFake',
+  (req, res) => {
+    res.sendFile(path.join(__dirname, '../addFake.html'));
   },
 );
 

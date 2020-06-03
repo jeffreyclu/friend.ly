@@ -1,0 +1,49 @@
+<button onClick="generateFake()">add fake</button>
+<script>
+  const generateFake = () => {
+    for (let i=0; i<100; i++) {
+      
+      fetch("https://randomuser.me/api/")
+        .then(resp => resp.json())
+        .then(data => {
+          // console.log(data)
+          const { name, location, dob, login, picture } = data.results[0]
+          const { first } = name;
+          const { city } = location;
+          const { age } = dob;
+          const { username, password } = login;
+          const { large } = picture;
+          const pronouns = ["He", "She", "They", "Other"];
+          const primary_interests = ["Live Music", "Live Sports", "Art Shows", "Dancing", "Watching Movies", "Eating Out"];
+          const pronoun = pronouns[getRandom(0, 4)];
+          const primary_interest = primary_interests[getRandom(0, 6)];
+          const user = {
+            name: first,
+            age: age,
+            gender: pronoun,
+            city: "Melbourne",
+            primary_interest: primary_interest,
+            username: username,
+            password: password,
+            avatar: large,
+          }
+          fetch('/api/adduser', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+          })
+            .then((resp) => resp.json())
+            .then((data) => {console.log(data)})
+        })
+    }
+
+      const getRandom = (min, max) => {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        const output = Math.floor(Math.random() * (max - min)) + min
+        return output; //The maximum is exclusive and the minimum is inclusive
+      }
+  }
+</script>

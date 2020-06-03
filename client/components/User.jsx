@@ -1,14 +1,16 @@
 import React from 'react'
 
-const User = ({ matchedUsers, matchedUserIndex }) => {
-  const currentMatch = matchedUsers[matchedUserIndex];
-  const { name, age, gender, city, primary_interest } = currentMatch;
+const User = ({ potentialMatches, meetUser, skipUser, idling }) => {
+  const currentMatch = potentialMatches[0];
+  const { name, age, gender, city, primary_interest, avatar } = currentMatch;
   // TODO add ability to swipe left and right
   // TODO add avatars
   return (
     <div className="matchedUserContainer">
       <div className="matchedUser">
-        <div className="avatar"></div>
+        <div className="avatar">
+          <img src={avatar} className="avatarNew"/>
+        </div>
         <div className="matchedHeader">
           <span className="matchedUserName">
             {name}, {age}
@@ -21,8 +23,12 @@ const User = ({ matchedUsers, matchedUserIndex }) => {
           </p>
         </div>
       </div>
-      <div className="arrow left">Meet</div>
-      <div className="arrow right">Skip</div>
+      {
+        idling === false && <div className="arrow left" onClick={meetUser}>Meet</div>
+      }
+      {
+        idling === false && <div className="arrow right" onClick={skipUser}>Skip</div>
+      }
     </div>
   );
 };

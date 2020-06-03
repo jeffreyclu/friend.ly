@@ -7,12 +7,17 @@ div.matchedUserContainer {
   position: relative;
   margin: 0;
   div.matchedUser {
-    animation: smallspin 10s infinite;
+    animation: appear 1s 1, smallspin 10s infinite;
     background-color: $white;
+    border: 1px solid$white;
     div.avatar {
-      background-image: url(../assets/avatars/r-a-gDoNB_BCkdE-unsplash.jpg);
+      // background-image: url(../assets/avatars/r-a-gDoNB_BCkdE-unsplash.jpg);
       background-size: cover;
       background-position: center;
+      width: 600px;
+      height: 600px;
+    }
+    img.avatarNew {
       width: 600px;
       height: 600px;
     }
@@ -72,7 +77,7 @@ div.matchedUserContainer {
     display: flex;
     align-items: center;
     margin: 0 -10rem 0;
-    // animation: spin 10s infinite;
+    animation: appear 1s 1;
     transition: transform 0.5s;
   }
   .right {
