@@ -35,10 +35,8 @@ class DashboardContainer extends Component {
     const promise2 = fetch('/api/getpotentials')
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data)) {
-          potentialMatches = data;
-          fetchedUsers = true;
-        }
+        if (Array.isArray(data.potentialMatches)) potentialMatches = data.potentialMatches;
+        fetchedUsers = true;
       });
     promises.push(promise2);
     Promise.all(promises)

@@ -21,7 +21,7 @@ router.get('/getpotentials',
   usersController.getPotentials,
   usersController.addPotentialMatches,
   (req, res) => {
-    res.status(200).json(res.locals.potentialMatches);
+    res.status(200).json({ potentialMatches: res.locals.potentialMatches, result: res.locals.result });
   });
 
 router.post('/syncpotentials',

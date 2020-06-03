@@ -101,7 +101,7 @@ usersController.getCurrentUser = (req, res, next) => {
 usersController.getPotentials = (req, res, next) => {
   const user = res.locals.currentUser;
   const promises = [];
-  if (user && !res.locals.gotPotentials) {
+  if (user && !res.locals.gotPotentials && !res.locals.gotMatches) {
     const promise1 = User.find(
       {
         city: user.city,
@@ -113,6 +113,7 @@ usersController.getPotentials = (req, res, next) => {
         if (resp.length > 0) {
           const potentialMatches = resp.filter((match) => match.username !== user.username);
           res.locals.potentialMatches = potentialMatches;
+          res.locals.result = { message: 'got potentials' };
         }
         next();
       })
@@ -120,7 +121,10 @@ usersController.getPotentials = (req, res, next) => {
     promises.push(promise1);
   }
   Promise.all(promises)
-    .then(() => next());
+    .then(() => {
+      res.locals.result = { message: 'already matched' };
+      next();
+    });
 };
 
 usersController.addPotentialMatches = (req, res, next) => {

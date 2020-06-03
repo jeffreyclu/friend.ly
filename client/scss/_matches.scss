@@ -5,4 +5,23 @@ div.matches {
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: flex-start;
+  div.match {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    img.matchAvatar {
+      width: 100px;
+      height: 100px;
+      display: none;
+    }
+    a.matchName {
+      font-size: $smallerFontSize;
+      line-height: 2rem;
+      color: $tundora;
+      &:hover + img.matchAvatar {
+        display: block;
+      }
+    }
+  }
 }
