@@ -195,6 +195,7 @@ usersController.addMatch = (req, res, next) => {
 };
 
 usersController.checkForMatch = (req, res, next) => {
+  console.log('checking')
   User.findOne({ _id: req.body._id })
     .then((resp) => {
       if (resp.matchedUsers.length > 0) {

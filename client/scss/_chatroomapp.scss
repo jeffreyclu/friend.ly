@@ -1,0 +1,93 @@
+#chatroomRoot {
+    position: relative;
+    min-height: 100vh;
+}
+
+div.chatroom {
+    margin: 6rem 0 10rem;
+    padding-bottom: 10rem;
+    animation: appear 1s 1;
+    font-family: $mainFont;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    line-height: 6rem;
+    div.chatMessageArea {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        min-height: 20vh;
+        max-height: 30vh;
+        min-width: 20vw;
+        max-width: 30vw;
+        padding: 2rem;
+        // border: 1px solid $keylimepearl;
+        overflow-y: auto;
+    }
+    div.chatRow {
+        margin: 1rem 0 0;
+        display: flex;
+        flex-flow: column nowrap;
+        line-height: 3rem;
+        font-size: $smallerFontSize;
+        width: 100%;
+        color: $white;
+        // border-bottom: 1px solid $lightgrey;
+        span.chatSender {
+            color: $tundora;
+            font-size: $smallestFontSize;
+            line-height: 1.5rem;
+        }
+        span.chatDate {
+            font-size: $smallestFontSize;
+            color: $tundora;
+        }
+        span.chatMessage {
+            padding: 1rem;
+            max-width: 80%;
+            border-radius: 1rem;
+        }
+        .blue {
+            background-color: $cerulean;
+        }
+        .red {
+            background-color: $tundora;
+        }
+    }
+    .you {
+        align-items: flex-start;
+    }
+    .they {
+        align-items: flex-end;
+    }
+    div.inputArea {
+        margin: 4rem 0 0;
+        border: 1px solid $lightgrey;
+        border-radius: 1rem;
+        width: 30vw;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid $pear;
+            font-size: $signupLabelFontSize;
+            outline: none;
+            width: 30vw;
+            color: $pear;
+            font-family: $mainFont;
+        }
+        a {
+            flex: 0 0 auto;
+            color: $pear;
+            font-family: $mainFont;
+            font-size: $mainFontSize;
+            font-weight: 800;
+            transition: transform 0.2s;
+            line-height: 4rem;
+          }
+    }
+}

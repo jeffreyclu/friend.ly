@@ -20,6 +20,13 @@ router.get('/chats',
   chatController.getParticipants,
   (req, res) => {
     res.json({ messages: res.locals.messages, participants: res.locals.participants });
+  });
+
+router.post('/postmessage',
+  chatController.postMessage,
+  (req, res) => {
+    res.json(res.locals.messages);
   }
 )
+
 module.exports = router;
