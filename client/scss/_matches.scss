@@ -1,8 +1,9 @@
 div.matches {
   position: fixed;
   left: 10rem;
+  top: 12.5rem;
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: column wrap;
   justify-content: flex-start;
   align-items: flex-start;
   div.match {
@@ -14,10 +15,11 @@ div.matches {
       width: 100px;
       height: 100px;
       display: none;
+      margin-left: 2rem;
     }
     a.matchName {
       font-size: $smallerFontSize;
-      line-height: 2rem;
+      line-height: 3rem;
       color: $tundora;
       &:hover + img.matchAvatar {
         display: block;
