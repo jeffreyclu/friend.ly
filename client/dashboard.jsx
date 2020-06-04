@@ -4,4 +4,4 @@ import DashboardContainer from './components/DashboardContainer.jsx';
 
 import styles from './scss/dashboard.scss';
 
-render(<DashboardContainer />, document.getElementById('root2'));
+render(<DashboardContainer />, document.getElementById('dashboardRoot'));

@@ -1,18 +1,27 @@
 body {
   background-color: $tundora;
+}
+
+#signupFormBottom {
+  animation: appear 1s 1;
+}
+
+#root {
+  position: relative;
+  min-height: 100vh;
+}
+
+.signupContent {
+  min-height: 100vh;
   background-image: url(/client/assets/img/vishnu-r-nair-m1WZS5ye404-unsplash.jpg);
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top;
   background-size: cover;
-  padding: 0;
-  margin: 0;
+  padding: 0 0 10rem;
+  margin: 0 0 10rem;
   display: flex;
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: center;
   animation: changeBg 60s infinite;
-}
-
-#signupFormBottom {
-  animation: appear 1s 1;
 }

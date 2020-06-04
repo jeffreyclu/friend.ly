@@ -4,6 +4,7 @@ import Login from './Login.jsx';
 import Logo from './Logo.jsx';
 import NavbarLoggedOut from './NavbarLoggedOut.jsx';
 import AboutSection from './AboutSection.jsx';
+import Footer from './Footer.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -132,33 +133,36 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <NavbarLoggedOut
-          toggleLogin={this.toggleLogin}
-          loginToggle={this.state.loginToggle}
-          scrollToAbout={this.scrollToAbout}
-        />
-        <Logo />
-        {this.state.loginToggle ? (
-          <Login
+      <>
+        <div className="signupContent">
+          <NavbarLoggedOut
             toggleLogin={this.toggleLogin}
-            setLogin={this.setLogin}
-            handleLogin={this.handleLogin}
-            loginMessage={this.state.loginMessage}
+            loginToggle={this.state.loginToggle}
+            scrollToAbout={this.scrollToAbout}
           />
-        ) : (
-          <Signup
-            toggleLogin={this.toggleLogin}
-            toggleSignupFull={this.toggleSignupFull}
-            signupFull={this.state.signupFull}
-            setNewUser={this.setNewUser}
-            validateWarning={this.state.validateWarning}
-          />
-        )}
+          <Logo />
+          {this.state.loginToggle ? (
+            <Login
+              toggleLogin={this.toggleLogin}
+              setLogin={this.setLogin}
+              handleLogin={this.handleLogin}
+              loginMessage={this.state.loginMessage}
+            />
+          ) : (
+            <Signup
+              toggleLogin={this.toggleLogin}
+              toggleSignupFull={this.toggleSignupFull}
+              signupFull={this.state.signupFull}
+              setNewUser={this.setNewUser}
+              validateWarning={this.state.validateWarning}
+            />
+          )}
+        </div>
         <AboutSection
           focusDiv={this.focusDiv}
         />
-      </div>
+        <Footer />
+      </>
     );
   }
 }

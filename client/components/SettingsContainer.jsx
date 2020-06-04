@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavbarLoggedIn from './NavbarLoggedIn.jsx';
 import SettingsApp from './SettingsApp.jsx';
+import Footer from './Footer.jsx';
 
 class SettingsContainer extends Component {
   constructor(props) {
@@ -8,11 +9,11 @@ class SettingsContainer extends Component {
     this.state = {
       user: {},
       loaded: false,
-      status: "",
+      status: '',
       newUser: {
-        city: "",
-        primary_interest: "Live Music",
-      }
+        city: '',
+        primary_interest: 'Live Music',
+      },
     };
     this.setNewUser = this.setNewUser.bind(this);
     this.handleSettingsChange = this.handleSettingsChange.bind(this);
@@ -39,7 +40,7 @@ class SettingsContainer extends Component {
   handleSettingsChange() {
     this.setState((prevState) => {
       let { user, newUser, status } = prevState;
-      console.log(user, newUser)
+      console.log(user, newUser);
       if (user && newUser.city && newUser.primary_interest) {
         fetch('/api/edituser', {
           method: 'POST',
@@ -50,40 +51,42 @@ class SettingsContainer extends Component {
         })
           .then((resp) => resp.json())
           .then((data) => {
-            if (data.message === 'success') window.location.href='/';
+            if (data.message === 'success') window.location.href = '/';
             newUser = {
-              city: "",
-              primary_interest: "Live Music",
-            }
-            status = "Success!";
+              city: '',
+              primary_interest: 'Live Music',
+            };
+            status = 'Success!';
             return { newUser };
-          })
-      }
-      else {
-        status = "Error, all fields must be filled in";
+          });
+      } else {
+        status = 'Error, all fields must be filled in';
         return { status };
       }
-    })
+    });
   }
 
   render() {
     return (
-      <div>
+      <>
         <NavbarLoggedIn />
         <div className="settingsForm">
           {
             this.state.loaded
-              ? <SettingsApp 
-                  user={this.state.user} 
+              ? (
+                <SettingsApp
+                  user={this.state.user}
                   newUser={this.state.newUser}
-                  status={this.state.status} 
-                  handleSettingsChange={this.handleSettingsChange} 
-                  setNewUser={this.setNewUser} 
+                  status={this.state.status}
+                  handleSettingsChange={this.handleSettingsChange}
+                  setNewUser={this.setNewUser}
                 />
+              )
               : <h3>Loading...</h3>
           }
         </div>
-      </div>
+        <Footer />
+      </>
     );
   }
 }

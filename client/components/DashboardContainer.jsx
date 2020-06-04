@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DashboardApp from './DashboardApp.jsx';
 import NavbarLoggedIn from './NavbarLoggedIn.jsx';
+import Footer from './Footer.jsx';
 
 class DashboardContainer extends Component {
   constructor(props) {
@@ -112,7 +113,7 @@ class DashboardContainer extends Component {
 
   render() {
     return (
-      <div>
+      <>
         <NavbarLoggedIn />
         {this.state.fetchedUsers ? (
           <DashboardApp
@@ -128,7 +129,8 @@ class DashboardContainer extends Component {
             <span>Loading...</span>
           </div>
         )}
-      </div>
+        <Footer />
+      </>
     );
   }
 }

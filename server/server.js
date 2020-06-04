@@ -35,7 +35,10 @@ app.post(
   cookieController.setSSIDCookie,
   sessionController.isLoggedIn,
   (req, res) => {
-    res.status(200).json({ session: res.locals.session, result: res.locals.result });
+    res.status(200).json({
+      session: res.locals.session,
+      result: res.locals.result,
+    });
   },
 );
 
@@ -72,8 +75,8 @@ app.get(
     } else {
       res.redirect('/');
     }
-  }
-)
+  },
+);
 
 app.get(
   '/logout',
@@ -88,15 +91,19 @@ app.get(
   sessionController.isLoggedIn,
   usersController.getCurrentUser,
   (req, res) => {
-    res.send({ currentSession: res.locals.session, currentUser: res.locals.currentUser, matchedUsers: res.locals.matchedUsers, potentialMatches: res.locals.potentialMatches });
+    res.send({
+      currentSession: res.locals.session,
+      currentUser: res.locals.currentUser,
+      matchedUsers: res.locals.matchedUsers,
+      potentialMatches: res.locals.potentialMatches,
+    });
   },
 );
 
 app.get('/addFake',
   (req, res) => {
     res.sendFile(path.join(__dirname, '../addFake.html'));
-  },
-);
+  });
 
 app.get('*', (req, res) => {
   res.sendStatus(404);

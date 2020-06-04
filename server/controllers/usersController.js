@@ -35,21 +35,22 @@ usersController.addUser = (req, res, next) => {
 };
 
 usersController.editUser = (req, res, next) => {
-  User.findOneAndUpdate(
-    { _id: req.body.user._id }, 
-    { 
+  User.findOneAndModify(
+    { _id: req.body.user._id },
+    {
       city: req.body.newUser.city,
       primary_interest: req.body.newUser.primary_interest,
       potentialMatches: [],
-     })
-     .exec()
-     .then((resp) => {
-       console.log(resp);
-       res.locals.result = { message: 'success' };
-       next();
-     })
-     .catch(next);
-}
+    },
+  )
+    .exec()
+    .then((resp) => {
+      console.log(resp);
+      res.locals.result = { message: 'success' };
+      next();
+    })
+    .catch(next);
+};
 
 usersController.checkUsername = (req, res, next) => {
   User.find({ username: req.body.username })
@@ -81,7 +82,7 @@ usersController.verifyUser = (req, res, next) => {
             const ssid = resp[0]._doc._id;
             res.locals.userId = ssid;
             res.locals.result = { message: 'user found' };
-            Session.create({ cookieId: ssid, testKey: 'hello world!' });
+            Session.create({ cookieId: ssid });
           }
           next();
         });
@@ -147,7 +148,7 @@ usersController.getPotentials = (req, res, next) => {
 usersController.addPotentialMatches = (req, res, next) => {
   const promises = [];
   if (res.locals.potentialMatches && res.locals.currentUser && !res.locals.gotPotentials) {
-    const promise1 = User.findOneAndUpdate(
+    const promise1 = User.findOneAndModify(
       { _id: res.locals.currentUser._id },
       { potentialMatches: res.locals.potentialMatches },
     )
@@ -164,7 +165,7 @@ usersController.addPotentialMatches = (req, res, next) => {
 
 usersController.syncPotentialMatches = (req, res, next) => {
   // TODO validate req.body
-  User.findOneAndUpdate(
+  User.findOneAndModify(
     { _id: res.locals.currentUser._id },
     { potentialMatches: req.body },
   )
@@ -179,7 +180,7 @@ usersController.syncPotentialMatches = (req, res, next) => {
 
 usersController.addMatch = (req, res, next) => {
   // TODO validate req body
-  User.findOneAndUpdate(
+  User.findOneAndModify(
     { _id: res.locals.currentUser._id },
     { matchedUsers: req.body },
   )

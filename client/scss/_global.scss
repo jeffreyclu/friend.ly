@@ -196,6 +196,23 @@ div.formBtns {
   }
 }
 
+footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: black;
+  height: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  font-size: $smallerFontSize;
+  color: $lightgrey;
+  div {
+    padding: 4rem 0 4rem;
+  }
+}
+
 @keyframes changeBg
 {
   0%   {background-image: url(/client/assets/img/vishnu-r-nair-m1WZS5ye404-unsplash.jpg);}

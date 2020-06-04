@@ -1,13 +1,19 @@
 body {
   background-color: $tundora;
+}
+
+#dashboardRoot {
+  position: relative;
+  min-height: 100vh;
   background-image: url(/client/assets/img/deva-darshan-4NZ-Q_uuKl8-unsplash.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-} 
+}
 
 div.dashboard {
-  margin-top: 6rem;
+  margin: 6rem 0 10rem;
+  padding-bottom: 10rem;
   animation: appear 1s 1;
   font-family: $mainFont;
   display: flex;
