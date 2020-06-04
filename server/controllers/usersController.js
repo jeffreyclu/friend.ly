@@ -35,17 +35,17 @@ usersController.addUser = (req, res, next) => {
 };
 
 usersController.editUser = (req, res, next) => {
-  User.findOneAndModify(
+  User.findOneAndUpdate(
     { _id: req.body.user._id },
     {
       city: req.body.newUser.city,
       primary_interest: req.body.newUser.primary_interest,
       potentialMatches: [],
+      matchedUsers: [],
     },
   )
     .exec()
     .then((resp) => {
-      console.log(resp);
       res.locals.result = { message: 'success' };
       next();
     })
@@ -148,7 +148,7 @@ usersController.getPotentials = (req, res, next) => {
 usersController.addPotentialMatches = (req, res, next) => {
   const promises = [];
   if (res.locals.potentialMatches && res.locals.currentUser && !res.locals.gotPotentials) {
-    const promise1 = User.findOneAndModify(
+    const promise1 = User.findOneAndUpdate(
       { _id: res.locals.currentUser._id },
       { potentialMatches: res.locals.potentialMatches },
     )
@@ -165,7 +165,7 @@ usersController.addPotentialMatches = (req, res, next) => {
 
 usersController.syncPotentialMatches = (req, res, next) => {
   // TODO validate req.body
-  User.findOneAndModify(
+  User.findOneAndUpdate(
     { _id: res.locals.currentUser._id },
     { potentialMatches: req.body },
   )
@@ -180,7 +180,7 @@ usersController.syncPotentialMatches = (req, res, next) => {
 
 usersController.addMatch = (req, res, next) => {
   // TODO validate req body
-  User.findOneAndModify(
+  User.findOneAndUpdate(
     { _id: res.locals.currentUser._id },
     { matchedUsers: req.body },
   )
