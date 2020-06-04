@@ -102,15 +102,15 @@ div.logo {
     margin: 0;
     animation: flyLeft 1s 1;
   }
-  
-  span.subtitle {
+}
+
+span.subtitle {
     font-family: $mainFont;
     margin-top: -1rem;
     font-size: 2rem;
     font-weight: 700;
     color: $cerulean;
     animation: flyRight 1s 1;
-  }
 }
 
 div.form {

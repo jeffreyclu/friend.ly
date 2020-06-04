@@ -1,9 +1,11 @@
 #settingsRoot {
-  height: 100vh;
+  position: relative;
+  min-height: 120vh;
 }
 
 div.settingsForm {
-  margin-top: 6rem;
+  margin: 6rem 0 10rem;
+  padding: 0 0 10rem;
   animation: appear 1s 1;
   font-family: $mainFont;
   display: flex;
@@ -48,7 +50,6 @@ div.settingsForm {
 }
 
 div.settingsFormBtns {
-  margin-top: 4rem;
   display: flex;
   flex-flow: column nowrap;
   line-height: 8rem;

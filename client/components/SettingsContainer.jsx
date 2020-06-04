@@ -71,6 +71,8 @@ class SettingsContainer extends Component {
       <>
         <NavbarLoggedIn />
         <div className="settingsForm">
+          <h3>Settings</h3>
+          <span className="warning">Warning: changing these settings will reset your matches!</span>
           {
             this.state.loaded
               ? (
