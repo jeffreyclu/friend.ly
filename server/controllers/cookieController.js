@@ -10,4 +10,9 @@ cookieController.logout = (req, res, next) => {
   next();
 };
 
+cookieController.setChatSSIDCookie = (req, res, next) => {
+  res.cookie('chatssid', res.locals.chatId, { httpOnly: true });
+  next();
+};
+
 module.exports = cookieController;

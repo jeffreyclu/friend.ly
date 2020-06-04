@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use('/build', express.static(path.join(__dirname, '../build')));
 app.use('/client', express.static(path.join(__dirname, '../client')));
 app.use('/api', apiRouter);
-app.use('/chat', chatRouter);
+app.use('/chatroom', chatRouter);
 
 app.get(
   '/',

@@ -75,22 +75,22 @@ class DashboardContainer extends Component {
         .then((resp) => resp.json())
         .then((data) => console.log(data));
       promises.push(promise2);
-      const promise3 = fetch('/api/checkformatch', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(desiredUser),
-      })
-        .then((resp) => resp.json())
-        .then((data) => {
-          if (data.message === 'matched') {
-            matchedUsers.forEach((match) => {
-              if (match._id === desiredUser._id) match.isMatched = true;
-            });
-          }
-        });
-      promises.push(promise3);
+      // const promise3 = fetch('/api/checkformatch', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(desiredUser),
+      // })
+      //   .then((resp) => resp.json())
+      //   .then((data) => {
+      //     if (data.message === 'matched') {
+      //       matchedUsers.forEach((match) => {
+      //         if (match._id === desiredUser._id) match.isMatched = true;
+      //       });
+      //     }
+      //   });
+      // promises.push(promise3);
       Promise.all(promises)
         .then(() => {
           this.setState(() => {

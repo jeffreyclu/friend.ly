@@ -7,8 +7,18 @@ const path = require('path');
 
 const router = express.Router();
 
-router.get('/:participant1/:participant2',
-  chatController.getChatroom,
-  (req, res) => res.json(res.locals.result));
+router.get('/check/:participant1/:participant2',
+  chatController.checkChatroom,
+  cookieController.setChatSSIDCookie,
+  (req, res) => {
+    if (res.locals.result.message === 'matched') res.redirect('/chatroom');
+    else res.redirect('/dashboard');
+  });
 
+router.get('/chats',
+  chatController.getChats,
+  (req, res) => {
+    res.json({ messages: res.locals.messages, participants: res.locals.participants });
+  }
+)
 module.exports = router;
