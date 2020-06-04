@@ -17,6 +17,7 @@ router.get('/check/:participant1/:participant2',
 
 router.get('/chats',
   chatController.getChats,
+  chatController.getParticipants,
   (req, res) => {
     res.json({ messages: res.locals.messages, participants: res.locals.participants });
   }
