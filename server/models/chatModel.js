@@ -3,9 +3,8 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const chatSchema = new Schema({
-  sender: { type: String, required: true },
-  recepient: { type: String, required: true },
-  message: { type: String, required: true },
+  participants: { type: Array, required: true },
+  messages: { type: Array, required: false },
 });
 
 const Chat = mongoose.model('chats', chatSchema);

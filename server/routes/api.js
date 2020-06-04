@@ -46,5 +46,11 @@ router.post('/addmatch',
     res.json(res.locals.result);
   });
 
+router.post('/checkformatch',
+  usersController.getCurrentUser,
+  usersController.checkForMatch,
+  (req, res) => {
+    res.json(res.locals.result);
+  });
 
 module.exports = router;

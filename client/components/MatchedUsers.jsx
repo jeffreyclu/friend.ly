@@ -1,10 +1,10 @@
 import React from 'react';
 
-const MatchedUsers = ({ matchedUsers }) => {
-  const matches = matchedUsers.map((user) => (
-    <div className='match' key={user._id}>
-      <a href='/chatroom' key={user.name} className='matchName'>{user.name}</a>
-      <img key={user.avatar} src={user.avatar} className='matchAvatar' />
+const MatchedUsers = ({ matchedUsers, user }) => {
+  const matches = matchedUsers.map((match) => (
+    <div className='match' key={match._id}>
+      <a href={`/chat/${user._id}/${match._id}`} key={match.name} className={match.isMatched ? "matchedName": "matchName"}>{match.name}</a>
+      <img key={match.avatar} src={match.avatar} className='matchAvatar' />
     </div>
   ));
   return (

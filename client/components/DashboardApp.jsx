@@ -20,7 +20,7 @@ const DashboardApp = ({ user, potentialMatches, matchedUsers, meetUser, skipUser
           : <NoUsers user={user}/>
       }
       {
-        matchedUsers.length > 0 && <MatchedUsers matchedUsers={matchedUsers} />
+        matchedUsers.length > 0 && <MatchedUsers matchedUsers={matchedUsers} user={user} />
       }
     </div>
   );

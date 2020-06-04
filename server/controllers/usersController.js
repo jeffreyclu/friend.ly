@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const cloudinary = require('cloudinary').v2; // TODO investigate this
 const User = require('../models/friendlyModels');
 const Session = require('../models/sessionModel');
+const Chat = require('../models/chatModel');
 
 const usersController = {};
 
@@ -188,6 +189,33 @@ usersController.addMatch = (req, res, next) => {
     .then((resp) => {
       if (resp) res.locals.result = { message: 'success' };
       else res.locals.result = { message: 'failed' };
+      next();
+    })
+    .catch(next);
+};
+
+usersController.checkForMatch = (req, res, next) => {
+  User.findOne({ _id: req.body._id })
+    .then((resp) => {
+      if (resp.matchedUsers.length > 0) {
+        resp.matchedUsers.forEach((match) => {
+          console.log('second')
+          console.log(match._id, res.locals.currentUser._id)
+          if (JSON.stringify(match._id) === JSON.stringify(res.locals.currentUser._id)) {
+            console.log('third')
+            res.locals.result = { message: "matched" };
+            const participants = [match._id, req.body._id];
+            Chat.create({
+              participants,
+            });
+          }
+          else {
+            res.locals.result = { message: "not matched" };
+          }
+        });
+      } else {
+        res.locals.result = { message: "not matched" };
+      }
       next();
     })
     .catch(next);

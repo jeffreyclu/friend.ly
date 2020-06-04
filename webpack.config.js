@@ -21,6 +21,7 @@ module.exports = () => {
       proxy: {
         '/dashboard': 'http://localhost:3000',
         '/settings': 'http://localhost:3000',
+        '/chat': 'http://localhost:3000',
         '/chatroom': 'http://localhost:3000',
         '/api': 'http://localhost:3000',
         '/login': 'http://localhost:3000',

@@ -8,17 +8,20 @@ const cookieController = require('./controllers/cookieController');
 const sessionController = require('./controllers/sessionController');
 
 const apiRouter = require('./routes/api');
+const chatRouter = require('./routes/chat');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
 
 app.use('/build', express.static(path.join(__dirname, '../build')));
 app.use('/client', express.static(path.join(__dirname, '../client')));
 app.use('/api', apiRouter);
+app.use('/chat', chatRouter);
 
 app.get(
   '/',
