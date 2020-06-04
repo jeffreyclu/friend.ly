@@ -62,7 +62,6 @@ chatController.getParticipants = (req, res, next) => {
 };
 
 chatController.postMessage = (req, res, next) => {
-  console.log('here', req.cookies.chatssid);
   Chat.findOneAndUpdate(
     { _id: req.cookies.chatssid },
     { $push: { messages: { sender: req.body.sender, message: req.body.message } } }

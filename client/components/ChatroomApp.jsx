@@ -7,11 +7,11 @@ const ChatroomApp = ({ messages, participants, setNewMessage, sendMessage, user 
   return (
     <div className="chatroom">
       <h3>Chatroom: {participants[0] + " - " + participants[1]}</h3>
-      <div className="chatMessageArea">
+      <div className="chatMessageArea" id="chatArea">
         { messages.length > 0 ? messageList : <h4>It's empty in here... why don't you break the ice?</h4> }
       </div>
       <div className="inputArea">
-        <input id="message" type="text" onChange={setNewMessage} />
+        <textarea rows="2" id="message" type="text" onChange={setNewMessage} />
         <a onClick={sendMessage}>Submit</a>
       </div>
     </div>

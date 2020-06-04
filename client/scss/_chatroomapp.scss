@@ -18,12 +18,11 @@ div.chatroom {
         flex-flow: column nowrap;
         align-items: flex-start;
         justify-content: flex-start;
-        min-height: 20vh;
-        max-height: 30vh;
-        min-width: 20vw;
-        max-width: 30vw;
+        height: 30vh;
+        width: 30vw;
         padding: 2rem;
-        // border: 1px solid $keylimepearl;
+        border: 1px solid $lightgrey;
+        border-radius: 1rem;
         overflow-y: auto;
     }
     div.chatRow {
@@ -70,7 +69,7 @@ div.chatroom {
         display: flex;
         flex-flow: column nowrap;
         align-items: center;
-        input {
+        textarea {
             background: transparent;
             border: none;
             border-bottom: 1px solid $pear;

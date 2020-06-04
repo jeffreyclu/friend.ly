@@ -19,42 +19,35 @@ class ChatroomContainer extends Component {
 
   componentDidMount() {
     const promises = [];
-    let participants = [];
-    let messages = [];
     let user = {};
-    let fetchedChats;
     const promise1 = fetch('/checklogin')
       .then((res) => res.json())
       .then((data) => {
         user = data.currentUser;
       });
     promises.push(promise1);
-    const promise2 = fetch('/chatroom/chats')
-      .then((resp) => resp.json())
-      .then((data) => {
-        participants = data.participants;
-        messages = data.messages;
-        fetchedChats = true;
-      });
-    promises.push(promise2);
     Promise.all(promises)
       .then(() => this.setState(() => {
-        return { participants, messages, user, fetchedChats }
+        return { user }
       }))
   }
 
   componentDidUpdate() {
     const promises = [];
     let messages = [];
+    let participants = [];
+    let fetchedChats;
     const promise1 = fetch('/chatroom/chats')
       .then((resp) => resp.json())
       .then((data) => {
+        participants = data.participants;
         messages = data.messages;
       });
     promises.push(promise1);
     Promise.all(promises)
       .then(() => this.setState(() => {
-        return { messages }
+        fetchedChats = true;
+        return { messages, fetchedChats, participants }
       }))
   }
 
