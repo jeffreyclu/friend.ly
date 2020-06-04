@@ -58,7 +58,7 @@ chatController.getParticipants = (req, res, next) => {
     .then(() => {
       res.locals.participants = participants;
       next();
-    })
-}
+    });
+};
 
 module.exports = chatController;
