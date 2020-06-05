@@ -1,3 +1,7 @@
+/* eslint-disable import/extensions */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/destructuring-assignment */
+
 import React from 'react';
 
 const SignupFull = ({ setNewUser }) => {

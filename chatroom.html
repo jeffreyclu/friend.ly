@@ -11,13 +11,22 @@
   <div id="chatroomroot"></div>
   <script src="build/chatroom.bundle.js"></script>
   <script>
-    window.onload = () => {
-      const scroll = () => {
-        let objDiv = document.querySelector("div.chatMessageArea");
-        objDiv.scrollTop = objDiv.scrollHeight;
-      }
-      window.setInterval(scroll, 1000)
-    }
+    // document.addEventListener("DOMContentLoaded", function (event) {
+    //   const submit = this.querySelector("a#submit");
+    //   const div = this.querySelector("div.chatMessageArea");
+    //   div.addEventListener('click', scrollToBottom);
+    //   const scrollToBottom = () => {
+    //     div.scrollTop = div.scrollHeight;
+    //   }
+    // });
+    // window.onload = () => {
+    //   // const scroll = () => {
+    //   //   let objDiv = document.querySelector("div.chatMessageArea");
+    //   //   objDiv.scrollTop = objDiv.scrollHeight;
+    //   // }
+    //   // window.setInterval(scroll, 1000)
+      
+    // }
   </script>
 </body>
 

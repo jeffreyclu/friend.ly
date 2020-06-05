@@ -1,3 +1,7 @@
+/* eslint-disable import/extensions */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/destructuring-assignment */
+
 import React, { Component } from 'react';
 import Signup from './Signup.jsx';
 import Login from './Login.jsx';
@@ -124,7 +128,7 @@ class App extends Component {
     });
   }
 
-  scrollToAbout(e) {
+  scrollToAbout() {
     this.focusDiv.current.scrollIntoView({
       behavior: 'smooth',
       block: 'nearest',

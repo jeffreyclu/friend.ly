@@ -2,8 +2,8 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-const MONGO_URI = process.env.DB_URI
-const SALT_WORK_FACTOR = 10; // TODO dotenv node package - makes a .env that doesn't get uploaded to github. manual upload to production server
+const MONGO_URI = process.env.DB_URI;
+const SALT_WORK_FACTOR = 10;
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,

@@ -1,13 +1,10 @@
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
-const cloudinary = require('cloudinary').v2; // TODO investigate this
 const User = require('../models/friendlyModels');
 const Session = require('../models/sessionModel');
 const Chat = require('../models/chatModel');
 
 const usersController = {};
-
-cloudinary.config(process.env.CLOUDINARY_URI);
 
 usersController.getUsers = (req, res, next) => {
   if (res.locals.session === true) {
@@ -194,15 +191,12 @@ usersController.addMatch = (req, res, next) => {
 };
 
 usersController.checkForMatch = (req, res, next) => {
-  console.log('checking')
   User.findOne({ _id: req.body._id })
     .then((resp) => {
       if (resp.matchedUsers.length > 0) {
         resp.matchedUsers.forEach((match) => {
-          console.log('second')
           console.log(match._id, res.locals.currentUser._id)
           if (JSON.stringify(match._id) === JSON.stringify(res.locals.currentUser._id)) {
-            console.log('third')
             res.locals.result = { message: "matched" };
             const participants = [match._id, req.body._id];
             Chat.create({

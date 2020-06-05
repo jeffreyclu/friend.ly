@@ -4,6 +4,12 @@ const User = require('../models/friendlyModels');
 
 const chatController = {};
 
+chatController.hasChat = (req, res, next) => {
+  if (req.cookies.chatssid === "undefined") res.locals.chat = false;
+  else res.locals.chat = true;
+  next();
+};
+
 chatController.checkChatroom = (req, res, next) => {
   const { participant1, participant2 } = req.params;
   Chat.findOne({

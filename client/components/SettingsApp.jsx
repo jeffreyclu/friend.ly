@@ -1,8 +1,11 @@
+/* eslint-disable import/extensions */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/destructuring-assignment */
+
 import React from 'react';
 
-// TODO add ability to change user's city and primary interest
 const SettingsApp = ({
-  user, newUser, status, setNewUser, handleSettingsChange,
+  user, status, setNewUser, handleSettingsChange,
 }) => {
   const { city, primary_interest } = user;
   return (

@@ -7,6 +7,17 @@ const path = require('path');
 
 const router = express.Router();
 
+router.get('/',
+  sessionController.isLoggedIn,
+  chatController.hasChat,
+  (req, res) => {
+    if (res.locals.session === true && res.locals.chat === true) {
+      res.status(200).sendFile(path.join(__dirname, '../../chatroom.html'));
+    } else {
+      res.redirect('/');
+    }
+  });
+
 router.get('/check/:participant1/:participant2',
   chatController.checkChatroom,
   cookieController.setChatSSIDCookie,
@@ -26,7 +37,6 @@ router.post('/postmessage',
   chatController.postMessage,
   (req, res) => {
     res.json(res.locals.messages);
-  }
-)
+  });
 
 module.exports = router;

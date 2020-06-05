@@ -6,7 +6,7 @@ const messageSchema = new Schema({
   sender: {type: String, required: true },
   message: {type: String, required: true },
   createdAt: { type: Date, default: Date.now },
-})
+});
 
 const chatSchema = new Schema({
   participants: { type: Array, required: true },

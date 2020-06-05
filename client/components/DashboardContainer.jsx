@@ -1,3 +1,6 @@
+/* eslint-disable import/extensions */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import DashboardApp from './DashboardApp.jsx';
 import NavbarLoggedIn from './NavbarLoggedIn.jsx';
@@ -11,7 +14,6 @@ class DashboardContainer extends Component {
       matchedUsers: [],
       user: {},
       fetchedUsers: false,
-      fetchedMatches: false,
       idling: false,
     };
     this.meetUser = this.meetUser.bind(this);
@@ -61,9 +63,7 @@ class DashboardContainer extends Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(matchedUsers),
-      })
-        .then((resp) => resp.json())
-        .then((data) => console.log(data));
+      });
       promises.push(promise1);
       const promise2 = fetch('/api/syncpotentials', {
         method: 'POST',
@@ -71,9 +71,7 @@ class DashboardContainer extends Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(potentialMatches),
-      })
-        .then((resp) => resp.json())
-        .then((data) => console.log(data));
+      });
       promises.push(promise2);
       const promise3 = fetch('/api/checkformatch', {
         method: 'POST',
@@ -115,8 +113,7 @@ class DashboardContainer extends Component {
         body: JSON.stringify(potentialMatches),
       })
         .then((resp) => resp.json())
-        .then((data) => {
-          console.log(data, 'here!!!');
+        .then(() => {
           this.setState(() => {
             idling = false;
             return { idling };
@@ -125,7 +122,7 @@ class DashboardContainer extends Component {
       return { potentialMatches, idling };
     });
   }
-  
+
   render() {
     return (
       <>

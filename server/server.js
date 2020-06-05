@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const usersController = require('./controllers/usersController');
 const cookieController = require('./controllers/cookieController');
 const sessionController = require('./controllers/sessionController');
+const chatController = require('./controllers/chatController');
 
 const apiRouter = require('./routes/api');
 const chatRouter = require('./routes/chat');
@@ -48,6 +49,7 @@ app.post(
 app.get(
   '/dashboard',
   sessionController.isLoggedIn,
+  cookieController.clearChatSSIDCookie,
   (req, res) => {
     if (res.locals.session === true) {
       res.status(200).sendFile(path.join(__dirname, '../dashboard.html'));
@@ -63,18 +65,6 @@ app.get(
   (req, res) => {
     if (res.locals.session === true) {
       res.status(200).sendFile(path.join(__dirname, '../settings.html'));
-    } else {
-      res.redirect('/');
-    }
-  },
-);
-
-app.get(
-  '/chatroom',
-  sessionController.isLoggedIn,
-  (req, res) => {
-    if (res.locals.session === true) {
-      res.status(200).sendFile(path.join(__dirname, '../chatroom.html'));
     } else {
       res.redirect('/');
     }
@@ -106,6 +96,11 @@ app.get(
 app.get('/addFake',
   (req, res) => {
     res.sendFile(path.join(__dirname, '../addFake.html'));
+  });
+
+app.get('/notauthorized',
+  (req, res) => {
+    res.sendFile(path.join(__dirname, '../notauthorized.html'));
   });
 
 app.get('*', (req, res) => {

@@ -1,3 +1,7 @@
+/* eslint-disable import/extensions */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/destructuring-assignment */
+
 import React, { Component } from 'react';
 import NavbarLoggedIn from './NavbarLoggedIn.jsx';
 import ChatroomApp from './ChatroomApp.jsx';

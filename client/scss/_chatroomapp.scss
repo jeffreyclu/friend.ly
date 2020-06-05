@@ -18,8 +18,12 @@ div.chatroom {
         flex-flow: column nowrap;
         align-items: flex-start;
         justify-content: flex-start;
-        height: 30vh;
-        width: 30vw;
+        height: 50vh;
+        @media (min-width: 1200px) {
+            width: 30vw;
+            height: 30vh;
+        };
+        width: 60vw;
         padding: 2rem;
         border: 1px solid $lightgrey;
         border-radius: 1rem;
@@ -33,7 +37,6 @@ div.chatroom {
         font-size: $smallerFontSize;
         width: 100%;
         color: $white;
-        // border-bottom: 1px solid $lightgrey;
         span.chatSender {
             color: $tundora;
             font-size: $smallestFontSize;
@@ -65,7 +68,10 @@ div.chatroom {
         margin: 4rem 0 0;
         border: 1px solid $lightgrey;
         border-radius: 1rem;
-        width: 30vw;
+        @media (min-width: 1200px) {
+            width: 30vw;
+        };
+        width: 60vw;
         display: flex;
         flex-flow: column nowrap;
         align-items: center;
@@ -75,7 +81,10 @@ div.chatroom {
             border-bottom: 1px solid $pear;
             font-size: $signupLabelFontSize;
             outline: none;
-            width: 30vw;
+            @media (min-width: 1200px) {
+                width: 30vw;
+            };
+            width: 60vw;
             color: $pear;
             font-family: $mainFont;
         }

@@ -1,3 +1,7 @@
+/* eslint-disable import/extensions */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/destructuring-assignment */
+
 import React, { Component } from 'react';
 import NavbarLoggedIn from './NavbarLoggedIn.jsx';
 import SettingsApp from './SettingsApp.jsx';
@@ -40,7 +44,6 @@ class SettingsContainer extends Component {
   handleSettingsChange() {
     this.setState((prevState) => {
       let { user, newUser, status } = prevState;
-      console.log(user, newUser);
       if (user && newUser.city && newUser.primary_interest) {
         fetch('/api/edituser', {
           method: 'POST',
@@ -51,7 +54,7 @@ class SettingsContainer extends Component {
         })
           .then((resp) => resp.json())
           .then((data) => {
-            if (data.message === 'success') window.location.href = '/';
+            if (data.message === 'success') window.location.href = '/dashboard';
             newUser = {
               city: '',
               primary_interest: 'Live Music',

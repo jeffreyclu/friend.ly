@@ -1,3 +1,7 @@
+/* eslint-disable import/extensions */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/destructuring-assignment */
+
 import React from 'react';
 
 const AboutSection = ({ focusDiv }) => {
@@ -9,7 +13,7 @@ const AboutSection = ({ focusDiv }) => {
         friends. It introduces you to other users in your selected location
         whose interest matches yours.
       </p>
-      <p>Friend.ly is currently free to use!</p>
+      <p>Friend.ly is currently free to use, so sign on up!</p>
     </div>
   );
 };

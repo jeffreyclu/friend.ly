@@ -1,10 +1,12 @@
+/* eslint-disable import/extensions */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/destructuring-assignment */
+
 import React from 'react'
 
 const User = ({ potentialMatches, meetUser, skipUser, idling }) => {
   const currentMatch = potentialMatches[0];
   const { name, age, gender, city, primary_interest, avatar } = currentMatch;
-  // TODO add ability to swipe left and right
-  // TODO add avatars
   return (
     <div className="matchedUserContainer">
       <div className="matchedUser">
