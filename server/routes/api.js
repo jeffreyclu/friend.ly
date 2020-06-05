@@ -2,6 +2,7 @@ const express = require('express');
 const usersController = require('../controllers/usersController');
 const cookieController = require('../controllers/cookieController');
 const sessionController = require('../controllers/sessionController');
+const chatController = require('../controllers/chatController');
 
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router.post('/adduser',
 router.post('/edituser',
   sessionController.isLoggedIn,
   usersController.editUser,
+  chatController.deleteChat,
   (req, res) => res.json(res.locals.result));
 
 router.get('/getpotentials',

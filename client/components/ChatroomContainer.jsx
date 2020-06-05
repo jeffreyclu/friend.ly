@@ -27,9 +27,7 @@ class ChatroomContainer extends Component {
       });
     promises.push(promise1);
     Promise.all(promises)
-      .then(() => this.setState(() => {
-        return { user }
-      }))
+      .then(() => this.setState(() => ({ user })));
   }
 
   componentDidUpdate() {
@@ -47,18 +45,16 @@ class ChatroomContainer extends Component {
     Promise.all(promises)
       .then(() => this.setState(() => {
         fetchedChats = true;
-        return { messages, fetchedChats, participants }
-      }))
+        return { messages, fetchedChats, participants };
+      }));
   }
 
   setNewMessage(e) {
     const { id, value } = e.target;
     this.setState((prevState) => {
-      console.log(user)
       const { user, newMessage } = prevState;
       newMessage[id] = value;
-      newMessage['sender'] = user.name;
-      console.log(newMessage)
+      newMessage.sender = user.name;
       return { newMessage };
     });
   }
@@ -67,21 +63,20 @@ class ChatroomContainer extends Component {
     this.setState((prevState) => {
       const { message, sender } = prevState.newMessage;
       let messages = [];
-      if (message !== "") {
-        fetch('/chatroom/postmessage', 
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ message, sender }),
-        })
-        .then((resp) => resp.json())
-        .then((data) => {
-          messages = data;
-          console.log(messages)
-          return { messages };
-        })
+      if (message !== '') {
+        fetch('/chatroom/postmessage',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message, sender }),
+          })
+          .then((resp) => resp.json())
+          .then((data) => {
+            messages = data;
+            return { messages };
+          });
       }
     });
   }
@@ -91,8 +86,8 @@ class ChatroomContainer extends Component {
       <>
         <NavbarLoggedIn />
         {
-          this.state.fetchedChats 
-            ?
+          this.state.fetchedChats
+            ? (
               <ChatroomApp
                 messages={this.state.messages}
                 participants={this.state.participants}
@@ -100,8 +95,8 @@ class ChatroomContainer extends Component {
                 sendMessage={this.sendMessage}
                 user={this.state.user}
               />
-            :
-              <h3>Loading...</h3>
+            )
+            : <h3>Loading...</h3>
         }
         <Footer />
       </>

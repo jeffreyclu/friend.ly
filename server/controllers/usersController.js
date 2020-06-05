@@ -47,7 +47,8 @@ usersController.editUser = (req, res, next) => {
   )
     .exec()
     .then((resp) => {
-      res.locals.result = { message: 'success' };
+      if (resp) res.locals.result = { message: 'success' };
+      else res.locals.result = { message: 'failed' };
       next();
     })
     .catch(next);
@@ -165,7 +166,6 @@ usersController.addPotentialMatches = (req, res, next) => {
 };
 
 usersController.syncPotentialMatches = (req, res, next) => {
-  // TODO validate req.body
   User.findOneAndUpdate(
     { _id: res.locals.currentUser._id },
     { potentialMatches: req.body },
@@ -180,7 +180,6 @@ usersController.syncPotentialMatches = (req, res, next) => {
 };
 
 usersController.addMatch = (req, res, next) => {
-  // TODO validate req body
   User.findOneAndUpdate(
     { _id: res.locals.currentUser._id },
     { matchedUsers: req.body },

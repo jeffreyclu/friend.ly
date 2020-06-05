@@ -11,11 +11,12 @@
   <div id="chatroomroot"></div>
   <script src="build/chatroom.bundle.js"></script>
   <script>
-    let objDiv = document.querySelector("div.chatMessageArea");
-    window.setInterval(scroll, 1000)
-    const scroll = () => {
-      
-      objDiv.scrollTop = objDiv.scrollHeight;
+    window.onload = () => {
+      const scroll = () => {
+        let objDiv = document.querySelector("div.chatMessageArea");
+        objDiv.scrollTop = objDiv.scrollHeight;
+      }
+      window.setInterval(scroll, 1000)
     }
   </script>
 </body>

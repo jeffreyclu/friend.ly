@@ -1,6 +1,6 @@
+const mongoose = require('mongoose');
 const Chat = require('../models/chatModel');
 const User = require('../models/friendlyModels');
-const mongoose = require('mongoose');
 
 const chatController = {};
 
@@ -40,7 +40,7 @@ chatController.getChats = (req, res, next) => {
 chatController.getParticipants = (req, res, next) => {
   const promises = [];
   const participants = [];
-  const promise1 = User.findOne({_id: res.locals.participants[0]})
+  const promise1 = User.findOne({ _id: res.locals.participants[0] })
     .exec()
     .then((resp) => {
       participants.push(resp.name);
@@ -64,14 +64,23 @@ chatController.getParticipants = (req, res, next) => {
 chatController.postMessage = (req, res, next) => {
   Chat.findOneAndUpdate(
     { _id: req.cookies.chatssid },
-    { $push: { messages: { sender: req.body.sender, message: req.body.message } } }
-    )
+    { $push: { messages: { sender: req.body.sender, message: req.body.message } } },
+  )
     .exec()
     .then((resp) => {
       res.locals.messages = resp.messages;
-      next()
+      next();
     })
     .catch(next);
-}
+};
+
+chatController.deleteChat = (req, res, next) => {
+  Chat.remove({ participants: req.cookies.ssid })
+    .exec()
+    .then(() => {
+      next();
+    })
+    .catch(next);
+};
 
 module.exports = chatController;

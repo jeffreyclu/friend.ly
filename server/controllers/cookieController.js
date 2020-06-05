@@ -15,4 +15,9 @@ cookieController.setChatSSIDCookie = (req, res, next) => {
   next();
 };
 
+cookieController.clearChatSSIDCookie = (req, res, next) => {
+  res.cookie('chatssid', undefined, { httpOnly: true });
+  next();
+}; // TODO where to use this?
+
 module.exports = cookieController;
