@@ -1,7 +1,11 @@
 div.matches {
-  position: fixed;
-  left: 10rem;
-  top: 12.5rem;
+  @media (min-width: 1200px) {
+    position: fixed;
+    left: 10rem;
+    top: 12.5rem;
+    margin: 0;
+  }
+  margin: 10rem 0 0;
   display: flex;
   flex-flow: column wrap;
   justify-content: flex-start;
@@ -16,6 +20,9 @@ div.matches {
       height: 100px;
       display: none;
       margin-left: 2rem;
+      animation: appear 1s 1;
+      opacity: 0;
+      border-radius: 50px;
     }
     a.matchName {
       font-size: $smallerFontSize;
@@ -23,6 +30,10 @@ div.matches {
       color: $tundora;
       &:hover + img.matchAvatar {
         display: block;
+        opacity: 100;
+      }
+      &:hover {
+        color: $cerulean;
       }
     }
   }

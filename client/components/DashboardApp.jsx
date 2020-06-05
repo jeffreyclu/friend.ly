@@ -10,12 +10,14 @@ const DashboardApp = ({ user, potentialMatches, matchedUsers, meetUser, skipUser
       {
         potentialMatches.length > 0
           ? (
+            !idling ?
             <User 
               potentialMatches={potentialMatches}
               meetUser={meetUser}
               skipUser={skipUser}
               idling={idling}
             />
+            : <h3>Checking...</h3>
           )
           : <NoUsers user={user}/>
       }
