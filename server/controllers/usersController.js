@@ -32,12 +32,12 @@ usersController.addUser = (req, res, next) => {
       Session.create({ cookieId: ssid });
       next();
     })
-    .catch(next);
+    .catch(next); // TODO refactor all of this
 };
 
 usersController.editUser = (req, res, next) => {
   User.findOneAndUpdate(
-    { _id: req.body.user._id },
+    { _id: req.cookies.ssid },
     {
       city: req.body.newUser.city,
       primary_interest: req.body.newUser.primary_interest,
@@ -84,7 +84,7 @@ usersController.verifyUser = (req, res, next) => {
             const ssid = resp[0]._doc._id;
             res.locals.userId = ssid;
             res.locals.result = { message: 'user found' };
-            Session.create({ cookieId: ssid });
+            Session.create({ cookieId: ssid }); // TODO refactor
           }
           next();
         });
@@ -108,10 +108,6 @@ usersController.getCurrentUser = (req, res, next) => {
           res.locals.gotMatches = true;
           res.locals.matchedUsers = resp.matchedUsers;
         }
-        if (resp.conversations.length > 0) {
-          res.locals.startedConvos = true;
-          res.locals.conversations = resp.conversations;
-        }
       }
       next();
     })
@@ -131,7 +127,10 @@ usersController.getPotentials = (req, res, next) => {
       .exec()
       .then((resp) => {
         if (resp.length > 0) {
-          const potentialMatches = resp.filter((match) => match.username !== user.username);
+          const potentialMatches = resp.map((match) => {
+            const { _id } = match;
+            return { _id };
+          });
           res.locals.potentialMatches = potentialMatches;
           res.locals.result = { message: 'got potentials' };
         }
