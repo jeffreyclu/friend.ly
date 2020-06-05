@@ -27,6 +27,7 @@ module.exports = () => {
         '/login': 'http://localhost:3000',
         '/logout': 'http://localhost:3000',
         '/checklogin': 'http://localhost:3000',
+        '/': 'http://localhost:3000',
       },
       hot: true,
     },

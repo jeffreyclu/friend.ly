@@ -29,8 +29,15 @@ class DashboardContainer extends Component {
     const promise2 = fetch('/api/getpotentials')
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data.potentialMatches)) potentialMatches = data.potentialMatches;
-        if (Array.isArray(data.matchedUsers)) matchedUsers = data.matchedUsers;
+        console.log(data);
+        if (data.result.message === 'already matched') {
+          potentialMatches = data.user.potentialMatches;
+          matchedUsers = data.user.matchedUsers;
+        } else {
+          if (Array.isArray(data.potentialMatches)) potentialMatches = data.potentialMatches;
+          if (Array.isArray(data.matchedUsers)) matchedUsers = data.matchedUsers;
+        }
+        user = data.user;
         fetchedUsers = true;
       });
     promises.push(promise2);
@@ -55,9 +62,7 @@ class DashboardContainer extends Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(matchedUsers),
-      })
-        .then((resp) => resp.json())
-        .then((data) => console.log(data));
+      });
       promises.push(promise1);
       const promise2 = fetch('/api/syncpotentials', {
         method: 'POST',
@@ -65,24 +70,23 @@ class DashboardContainer extends Component {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(potentialMatches),
-      })
-        .then((resp) => resp.json())
-        .then((data) => console.log(data));
+      });
       promises.push(promise2);
-      const promise3 = fetch('/api/checkformatch', {
-        method: 'POST',
+      const promise3 = fetch("/api/checkformatch", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(desiredUser),
       })
         .then((resp) => resp.json())
         .then((data) => {
-          if (data.message === 'matched') {
-            matchedUsers.forEach((match) => {
-              if (match._id === desiredUser._id) match.isMatched = true;
-            });
-          }
+          console.log(data)
+          // if (data.message === 'matched') {
+          //   matchedUsers.forEach((match) => {
+          //     if (match._id === desiredUser._id) match.isMatched = true;
+          //   });
+          // }
         });
       promises.push(promise3);
       Promise.all(promises)
@@ -110,7 +114,6 @@ class DashboardContainer extends Component {
       })
         .then((resp) => resp.json())
         .then((data) => {
-          console.log(data, 'here!!!');
           this.setState(() => {
             idling = false;
             return { idling };
@@ -119,7 +122,7 @@ class DashboardContainer extends Component {
       return { potentialMatches, idling };
     });
   }
-  
+
   render() {
     return (
       <>

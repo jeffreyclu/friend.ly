@@ -38,7 +38,7 @@ app.post(
   cookieController.setSSIDCookie,
   sessionController.isLoggedIn,
   (req, res) => {
-    res.status(200).json({
+    res.json({
       session: res.locals.session,
       result: res.locals.result,
     });
@@ -103,19 +103,13 @@ app.get('/addFake',
     res.sendFile(path.join(__dirname, '../addFake.html'));
   });
 
-app.get('*', (req, res) => {
-  res.sendStatus(404);
-});
+// app.get('*', (req, res) => {
+//   res.sendStatus(404);
+// });
 
 app.use((err, req, res, next) => {
+  console.log('here')
   console.log(err)
-  const defaultErr = {
-    log: 'Express error handler caught unknown middleware error',
-    status: 400,
-    message: { err: 'An error occurred' },
-  };
-  const errorObj = Object.assign(defaultErr, err);
-  res.json(errorObj.message);
 });
 
 app.listen(PORT, () => {

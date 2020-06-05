@@ -16,7 +16,9 @@ router.post('/edituser',
   sessionController.isLoggedIn,
   usersController.editUser,
   chatController.deleteChat,
-  (req, res) => res.json(res.locals.result));
+  (req, res) => {
+    res.json(res.locals.result);
+  });
 
 router.get('/getpotentials',
   usersController.getCurrentUser,
@@ -24,6 +26,7 @@ router.get('/getpotentials',
   usersController.addPotentialMatches,
   (req, res) => {
     res.json({
+      user: res.locals.currentUser,
       potentialMatches: res.locals.potentialMatches,
       result: res.locals.result,
     });
@@ -47,6 +50,7 @@ router.post('/checkformatch',
   usersController.getCurrentUser,
   usersController.checkForMatch,
   (req, res) => {
+    console.log(res.locals.result);
     res.json(res.locals.result);
   });
 
@@ -54,6 +58,12 @@ router.post('/getuserinfo',
   usersController.getUserInfo,
   (req, res) => {
     res.json(res.locals.userInfo);
+  });
+
+router.get('/getcurrentuser',
+  usersController.getCurrentUser,
+  (req, res) => {
+    res.json(res.locals.currentUser);
   });
 
 module.exports = router;

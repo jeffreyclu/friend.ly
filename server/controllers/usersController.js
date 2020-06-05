@@ -83,16 +83,14 @@ usersController.getCurrentUser = (req, res, next) => {
     .then((resp) => {
       if (resp) {
         res.locals.currentUser = resp;
-        // check if the user has any potential matches, if yes then send them
-        if (resp.potentialMatches.length > 0) {
-          res.locals.gotPotentials = true;
-          res.locals.potentialMatches = resp.potentialMatches;
-        }
+        // // check if the user has any potential matches, if yes then send them
+        // if (resp.potentialMatches.length > 0) {
+        //   res.locals.gotPotentials = true;
+        // }
         // check if the user has any matched users, if yes then send them
-        if (resp.matchedUsers.length > 0) {
-          res.locals.gotMatches = true;
-          res.locals.matchedUsers = resp.matchedUsers;
-        }
+        // if (resp.matchedUsers.length > 0) {
+        //   res.locals.gotMatches = true;
+        // }
       }
       next();
     })
@@ -100,10 +98,15 @@ usersController.getCurrentUser = (req, res, next) => {
 };
 
 usersController.getUserInfo = (req, res, next) => {
-  console.log(req.body)
   User.findOne({ _id: req.body._id })
+    .exec()
     .then((resp) => {
-      if (resp) res.locals.userInfo = resp;
+      if (resp) {
+        const pruned = { ...resp._doc };
+        delete pruned.potentialMatches;
+        delete pruned.matchedUsers;
+        res.locals.userInfo = pruned;
+      }
       next();
     })
     .catch(next);
@@ -111,38 +114,26 @@ usersController.getUserInfo = (req, res, next) => {
 
 usersController.getPotentials = (req, res, next) => {
   const user = res.locals.currentUser;
-  const promises = [];
-  // check if user is logged in and user has no potential matches or matches
-  if (user && !res.locals.gotPotentials && !res.locals.gotMatches) {
-    // find some matches!
-    const promise1 = User.find(
-      {
-        city: user.city,
-        primary_interest: user.primary_interest,
-      },
-    )
-      .exec()
-      .then((resp) => {
-        if (resp.length > 0) {
-          const filtered = resp.filter((match) => match._id !== user._id);
-          const potentialMatches = filtered.map((match) => {
-            const { _id } = match;
-            return { _id };
-          });
-          res.locals.potentialMatches = potentialMatches;
-          res.locals.result = { message: 'got potentials' };
-        }
-        next();
-      })
-      .catch(next);
-    promises.push(promise1);
-  }
-  Promise.all(promises)
-    .then(() => {
-      // otherwise, potential matches have already been sent so move on.
-      res.locals.result = { message: 'already matched' };
+  User.find(
+    {
+      city: user.city,
+      primary_interest: user.primary_interest,
+    },
+  )
+    .exec()
+    .then((resp) => {
+      if (resp.length > 0) {
+        const filtered = resp.filter((match) => match.username !== user.username);
+        const potentialMatches = filtered.map((match) => {
+          const { _id } = match;
+          return { _id };
+        });
+        res.locals.potentialMatches = potentialMatches;
+        res.locals.result = { message: 'got potentials' };
+      }
       next();
-    });
+    })
+    .catch(next);
 };
 
 usersController.addPotentialMatches = (req, res, next) => {
@@ -192,27 +183,27 @@ usersController.addMatch = (req, res, next) => {
 };
 
 usersController.checkForMatch = (req, res, next) => {
-  console.log('checking')
-  User.findOne({ _id: req.body._id })
+  console.log('checking', req.body);
+  User.findOne({ _id: req.body })
     .then((resp) => {
+      console.log(resp)
       if (resp.matchedUsers.length > 0) {
         resp.matchedUsers.forEach((match) => {
-          console.log('second')
-          console.log(match._id, res.locals.currentUser._id)
+          console.log('second');
+          console.log(match._id, res.locals.currentUser._id);
           if (JSON.stringify(match._id) === JSON.stringify(res.locals.currentUser._id)) {
-            console.log('third')
-            res.locals.result = { message: "matched" };
+            console.log('third');
+            res.locals.result = { message: 'matched' };
             const participants = [match._id, req.body._id];
             Chat.create({
               participants,
             });
-          }
-          else {
-            res.locals.result = { message: "not matched" };
+          } else {
+            res.locals.result = { message: 'not matched' };
           }
         });
       } else {
-        res.locals.result = { message: "not matched" };
+        res.locals.result = { message: 'not matched' };
       }
       next();
     })

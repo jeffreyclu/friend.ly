@@ -20,12 +20,24 @@ class SettingsContainer extends Component {
   }
 
   componentDidMount() {
-    fetch('/checklogin')
+    const promises = [];
+    let user = {};
+    let loaded;
+    const promise1 = fetch('/checklogin');
+    promises.push(promise1);
+    const promise2 = fetch('/api/getcurrentuser')
       .then((res) => res.json())
-      .then((data) => this.setState({
-        user: data.currentUser,
-        loaded: true,
-      }));
+      .then((data) => {
+        user = data;
+        loaded = true;
+      });
+    promises.push(promise2);
+    Promise.all(promises)
+      .then(() => {
+        this.setState(() => {
+          return { user, loaded };
+        });
+      });
   }
 
   setNewUser(e) {
@@ -40,7 +52,6 @@ class SettingsContainer extends Component {
   handleSettingsChange() {
     this.setState((prevState) => {
       let { user, newUser, status } = prevState;
-      console.log(user, newUser);
       if (user && newUser.city && newUser.primary_interest) {
         fetch('/api/edituser', {
           method: 'POST',
@@ -52,12 +63,6 @@ class SettingsContainer extends Component {
           .then((resp) => resp.json())
           .then((data) => {
             if (data.message === 'success') window.location.href = '/';
-            newUser = {
-              city: '',
-              primary_interest: 'Live Music',
-            };
-            status = 'Success!';
-            return { newUser };
           });
       } else {
         status = 'Error, all fields must be filled in';

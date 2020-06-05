@@ -28,6 +28,7 @@ const usersSchema = new Schema({
   avatar: { type: String, required: false },
   potentialMatches: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   matchedUsers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  doubleMatched: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 
 usersSchema.pre('save', function (next) {

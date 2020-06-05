@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 const MatchedUsers = ({ matchedUsers, user }) => {
-  const matches = matchedUsers.map((match) => (
-    <div className='match' key={match._id}>
-      <a href={`/chatroom/check/${user._id}/${match._id}`} key={match.name} className={match.isMatched ? "matchedName": "matchName"}>{match.name}</a>
+  console.log(matchedUsers)
+  const matches = matchedUsers.map((match, index) => (
+    <div className='match' key={match}>
+      <a href={`/chatroom/check/${user._id}/${match._id}`} className={match.isMatched ? "matchedName": "matchName"}>{match.name}</a>
       <img key={match.avatar} src={match.avatar} className='matchAvatar' />
     </div>
   ));
