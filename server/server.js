@@ -92,14 +92,9 @@ app.get(
 app.get(
   '/checklogin',
   sessionController.isLoggedIn,
-  usersController.getCurrentUser,
   (req, res) => {
-    res.send({
-      currentSession: res.locals.session,
-      currentUser: res.locals.currentUser,
-      matchedUsers: res.locals.matchedUsers,
-      potentialMatches: res.locals.potentialMatches,
-    });
+    if (res.locals.session === true) res.json({ message: "logged in" });
+    else res.redirect('/');
   },
 );
 

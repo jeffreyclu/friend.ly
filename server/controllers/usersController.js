@@ -1,27 +1,10 @@
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
-const cloudinary = require('cloudinary').v2; // TODO investigate this
 const User = require('../models/friendlyModels');
 const Session = require('../models/sessionModel');
 const Chat = require('../models/chatModel');
 
 const usersController = {};
-
-cloudinary.config(process.env.CLOUDINARY_URI);
-
-usersController.getUsers = (req, res, next) => {
-  if (res.locals.session === true) {
-    User.find()
-      .exec()
-      .then((resp) => {
-        res.locals.users = resp;
-        next();
-      })
-      .catch(next);
-  } else {
-    next(); // TODO add "please login" page
-  }
-};
 
 usersController.addUser = (req, res, next) => {
   User.create(req.body)
@@ -100,10 +83,12 @@ usersController.getCurrentUser = (req, res, next) => {
     .then((resp) => {
       if (resp) {
         res.locals.currentUser = resp;
+        // check if the user has any potential matches, if yes then send them
         if (resp.potentialMatches.length > 0) {
           res.locals.gotPotentials = true;
           res.locals.potentialMatches = resp.potentialMatches;
         }
+        // check if the user has any matched users, if yes then send them
         if (resp.matchedUsers.length > 0) {
           res.locals.gotMatches = true;
           res.locals.matchedUsers = resp.matchedUsers;
@@ -114,10 +99,22 @@ usersController.getCurrentUser = (req, res, next) => {
     .catch(next);
 };
 
+usersController.getUserInfo = (req, res, next) => {
+  console.log(req.body)
+  User.findOne({ _id: req.body._id })
+    .then((resp) => {
+      if (resp) res.locals.userInfo = resp;
+      next();
+    })
+    .catch(next);
+};
+
 usersController.getPotentials = (req, res, next) => {
   const user = res.locals.currentUser;
   const promises = [];
+  // check if user is logged in and user has no potential matches or matches
   if (user && !res.locals.gotPotentials && !res.locals.gotMatches) {
+    // find some matches!
     const promise1 = User.find(
       {
         city: user.city,
@@ -127,7 +124,8 @@ usersController.getPotentials = (req, res, next) => {
       .exec()
       .then((resp) => {
         if (resp.length > 0) {
-          const potentialMatches = resp.map((match) => {
+          const filtered = resp.filter((match) => match._id !== user._id);
+          const potentialMatches = filtered.map((match) => {
             const { _id } = match;
             return { _id };
           });
@@ -141,6 +139,7 @@ usersController.getPotentials = (req, res, next) => {
   }
   Promise.all(promises)
     .then(() => {
+      // otherwise, potential matches have already been sent so move on.
       res.locals.result = { message: 'already matched' };
       next();
     });
@@ -154,7 +153,7 @@ usersController.addPotentialMatches = (req, res, next) => {
       { potentialMatches: res.locals.potentialMatches },
     )
       .exec()
-      .then((resp) => {
+      .then(() => {
         next();
       })
       .catch(next);

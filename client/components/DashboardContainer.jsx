@@ -24,19 +24,13 @@ class DashboardContainer extends Component {
     let potentialMatches = [];
     let matchedUsers = [];
     let fetchedUsers;
-    const promise1 = fetch('/checklogin')
-      .then((res) => res.json())
-      .then((data) => {
-        user = data.currentUser;
-        potentialMatches = user.potentialMatches;
-        matchedUsers = user.matchedUsers;
-        fetchedUsers = true;
-      });
+    const promise1 = fetch('/checklogin');
     promises.push(promise1);
     const promise2 = fetch('/api/getpotentials')
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data.potentialMatches)) potentialMatches = data.potentialMatches;
+        if (Array.isArray(data.matchedUsers)) matchedUsers = data.matchedUsers;
         fetchedUsers = true;
       });
     promises.push(promise2);
