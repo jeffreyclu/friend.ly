@@ -91,6 +91,7 @@ class SignupContainer extends Component {
       const validatedSignupForm = true;
       if (signupFull && validatedSignupForm) {
         newUser.username = newUser.username.toLowerCase();
+        newUser.avatar = 'https://cdn1.iconfinder.com/data/icons/business-users/512/circle-512.png';
         const promise1 = fetch('/api/adduser', {
           method: 'POST',
           headers: {

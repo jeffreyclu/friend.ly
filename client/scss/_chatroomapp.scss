@@ -9,10 +9,20 @@ div.chatroom {
     animation: appear 1s 1;
     font-family: $mainFont;
     display: flex;
-    flex-flow: row nowrap;
-    align-items: flex-start;
-    justify-content: space-around;
+    @media (min-width: 1200px) {
+        flex-flow: row nowrap;
+        align-items: flex-start;
+        justify-content: space-around;
+    };
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
     line-height: 6rem;
+    span.red {
+        color: $razzmatazz;
+        font-size: $mainFontSize;
+        line-height: 3rem;
+    }
     div.chatArea {
         display: flex;
         flex-flow: column nowrap;
@@ -35,7 +45,7 @@ div.chatroom {
             height: 20vh;
         };
         width: 60vw;
-        height: 50vh;
+        height: 30vh;
         padding: 2rem;
         // border: 1px solid $lightgrey;
         border-radius: 1rem;

@@ -47,7 +47,7 @@ class ChatroomApp extends Component {
             {messages.length > 0 ? (
               messageList
             ) : (
-              <h4>It's empty in here... why don't you break the ice?</h4>
+              <span className="red">It's empty in here... why don't you break the ice?</span>
             )}
             <div
               ref={(el) => {
