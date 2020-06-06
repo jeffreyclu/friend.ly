@@ -148,7 +148,7 @@ class SignupContainer extends Component {
         });
       promises.push(promise1);
     } else {
-      loginMessage = 'Error, all fields must be filled out.'; // TODO fix login error message handling
+      loginMessage = 'Error, all fields must be filled out.';
     }
     Promise.all(promises)
       .then(() => {

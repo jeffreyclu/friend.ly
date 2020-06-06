@@ -36,7 +36,6 @@ const SignupApp = (props) => {
           </label>
         </div>
         {signupFull && <SignupFull setNewUser={setNewUser} />}
-        
       </div>
       {signupWarning && <span className="warning">{signupWarning}</span>}
       <div className="formBtns">
