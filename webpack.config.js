@@ -11,7 +11,7 @@ module.exports = () => {
       settings: './client/settings.jsx',
       chatroom: './client/chatroom.jsx',
       lost: './client/lost.jsx',
-      notAuthorized: './client/notAuthorized.jsx',
+      notAuthorized: './client/notauthorized.jsx',
     },
     output: {
       publicPath: '/build/',
