@@ -96,6 +96,9 @@ div.chatroom {
             font-weight: 800;
             transition: transform 0.2s;
             line-height: 4rem;
+            &:hover {
+                color: $cerulean;
+            }
           }
     }
 }

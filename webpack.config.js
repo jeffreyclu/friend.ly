@@ -6,10 +6,12 @@ module.exports = () => {
   return {
     mode: process.env.NODE_ENV,
     entry: {
-      index: './client/index.jsx',
+      index: './client/signup.jsx',
       dashboard: './client/dashboard.jsx',
       settings: './client/settings.jsx',
       chatroom: './client/chatroom.jsx',
+      lost: './client/lost.jsx',
+      notAuthorized: './client/notAuthorized.jsx',
     },
     output: {
       publicPath: '/build/',

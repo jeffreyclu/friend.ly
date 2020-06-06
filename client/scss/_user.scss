@@ -7,6 +7,7 @@ div.matchedUserContainer {
   position: relative;
   margin: 0;
   div.matchedUser {
+    border-radius: 2rem;
     animation: appear 1s 1, smallspin 10s infinite;
     background-color: $white;
     border: 1px solid$white;
@@ -18,6 +19,7 @@ div.matchedUserContainer {
       height: 600px;
     }
     img.avatarNew {
+      border-radius: 2rem 2rem 0 0;
       width: 600px;
       height: 600px;
     }

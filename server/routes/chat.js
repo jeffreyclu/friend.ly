@@ -14,7 +14,7 @@ router.get('/',
     if (res.locals.session === true && res.locals.chat === true) {
       res.status(200).sendFile(path.join(__dirname, '../../chatroom.html'));
     } else {
-      res.redirect('/');
+      res.redirect('/notauthorized');
     }
   });
 

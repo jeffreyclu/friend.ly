@@ -3,14 +3,14 @@
 /* eslint-disable react/destructuring-assignment */
 
 import React, { Component } from 'react';
-import Signup from './Signup.jsx';
-import Login from './Login.jsx';
+import SignupApp from './SignupApp.jsx';
+import LoginApp from './LoginApp.jsx';
 import Logo from './Logo.jsx';
 import NavbarLoggedOut from './NavbarLoggedOut.jsx';
 import AboutSection from './AboutSection.jsx';
 import Footer from './Footer.jsx';
 
-class App extends Component {
+class SignupContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -146,14 +146,14 @@ class App extends Component {
           />
           <Logo />
           {this.state.loginToggle ? (
-            <Login
+            <LoginApp
               toggleLogin={this.toggleLogin}
               setLogin={this.setLogin}
               handleLogin={this.handleLogin}
               loginMessage={this.state.loginMessage}
             />
           ) : (
-            <Signup
+            <SignupApp
               toggleLogin={this.toggleLogin}
               toggleSignupFull={this.toggleSignupFull}
               signupFull={this.state.signupFull}
@@ -171,4 +171,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default SignupContainer;

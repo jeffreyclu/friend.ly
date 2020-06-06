@@ -5,7 +5,7 @@
 import React from 'react';
 import SignupFull from './SignupFull.jsx';
 
-const Signup = (props) => {
+const SignupApp = (props) => {
   const {
     toggleLogin,
     toggleSignupFull,
@@ -49,4 +49,4 @@ const Signup = (props) => {
   );
 };
 
-export default Signup;
+export default SignupApp;

@@ -21,7 +21,7 @@ const User = ({ potentialMatches, meetUser, skipUser, idling }) => {
         </div>
         <div className="matchedDesc">
           <p>
-            {gender} also loves {primary_interest.toLowerCase()}
+            {name} also loves {primary_interest.toLowerCase()}
           </p>
         </div>
       </div>

@@ -104,7 +104,7 @@ app.get('/notauthorized',
   });
 
 app.get('*', (req, res) => {
-  res.sendStatus(404);
+  res.status(404).sendFile(path.join(__dirname, '../lost.html'));
 });
 
 app.use((err, req, res, next) => {

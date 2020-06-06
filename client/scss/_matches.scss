@@ -5,6 +5,10 @@ div.matches {
     top: 12.5rem;
     margin: 0;
   }
+  &:hover + img.matchAvatar {
+    display: block;
+    opacity: 100;
+  }
   margin: 10rem 0 0;
   display: flex;
   flex-flow: column wrap;
@@ -28,10 +32,14 @@ div.matches {
       font-size: $smallerFontSize;
       line-height: 3rem;
       color: $tundora;
-      &:hover + img.matchAvatar {
-        display: block;
-        opacity: 100;
+      &:hover {
+        color: $cerulean;
       }
+    }
+    a.matchedName {
+      font-size: $mainFontSize;
+      line-height: 3rem;
+      color: $razzmatazz;
       &:hover {
         color: $cerulean;
       }

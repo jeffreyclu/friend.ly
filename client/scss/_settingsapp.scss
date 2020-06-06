@@ -13,6 +13,10 @@ div.settingsForm {
   align-items: center;
   justify-content: center;
   line-height: 4rem;
+  div {
+    margin: 1rem 0 0;
+    animation: appear 1s 1;
+  }
   label {
     font-size: $mainFontSize;
   }
@@ -55,7 +59,9 @@ div.settingsFormBtns {
   line-height: 8rem;
   justify-content: center;
   align-items: center;
+  animation: appear 1s 1;
   button {
+    margin-top: 3rem;
     flex: 0 0 auto;
     color: $pear;
     font-family: $mainFont;

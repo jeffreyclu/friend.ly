@@ -22,6 +22,7 @@ h2 {
 
 h3 {
   text-align: center;
+  animation: appear 1s 1;
 }
 
 h4 {
@@ -46,6 +47,7 @@ p {
 span.warning {
   color: red;
   font-size: $smallerFontSize;
+  animation: appear 1s 1;
 }
 
 nav {
@@ -85,6 +87,7 @@ nav {
     font-size: $smallerFontSize;
     color: $razzmatazz;
     margin: 0 1rem 0;
+    transition: transform 0.2s;
     &:hover {
       color: $cerulean;
       transform: scale(1.2);

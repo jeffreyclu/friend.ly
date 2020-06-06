@@ -29,6 +29,7 @@ class DashboardContainer extends Component {
     const promise1 = fetch('/checklogin')
       .then((res) => res.json())
       .then((data) => {
+        console.log(data, 'data1')
         user = data.currentUser;
         potentialMatches = user.potentialMatches;
         matchedUsers = user.matchedUsers;
@@ -38,6 +39,7 @@ class DashboardContainer extends Component {
     const promise2 = fetch('/api/getpotentials')
       .then((res) => res.json())
       .then((data) => {
+        console.log(data, 'data2')
         if (Array.isArray(data.potentialMatches)) potentialMatches = data.potentialMatches;
         fetchedUsers = true;
       });

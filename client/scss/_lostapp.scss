@@ -1,0 +1,18 @@
+body {
+  background-image: url(../assets/img/photo-1519817914152-22d216bb9170.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+div.lost {
+  margin: 6rem 0 10rem;
+  padding-bottom: 10rem;
+  animation: appear 1s 1;
+  font-family: $mainFont;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  line-height: 6rem;
+}

@@ -4,7 +4,7 @@
 
 import React from 'react';
 
-const Login = ({ toggleLogin, setLogin, handleLogin, loginMessage }) => {
+const LoginApp = ({ toggleLogin, setLogin, handleLogin, loginMessage }) => {
   return (
     <div id="loginForm" className="form">
       <div className="formRow">
@@ -28,4 +28,4 @@ const Login = ({ toggleLogin, setLogin, handleLogin, loginMessage }) => {
   );
 };
 
-export default Login;
+export default LoginApp;
