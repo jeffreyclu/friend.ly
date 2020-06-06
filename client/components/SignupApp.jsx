@@ -11,7 +11,7 @@ const SignupApp = (props) => {
     toggleSignupFull,
     signupFull,
     setNewUser,
-    validateWarning,
+    signupWarning,
   } = props;
   return (
     <div id="signupForm" className="form">
@@ -38,7 +38,7 @@ const SignupApp = (props) => {
         {signupFull && <SignupFull setNewUser={setNewUser} />}
         
       </div>
-      {validateWarning && <span className="warning">Error: all fields must be filled in.</span>}
+      {signupWarning && <span className="warning">{signupWarning}</span>}
       <div className="formBtns">
         <button id="signupBtn" onClick={toggleSignupFull}>
           Signup

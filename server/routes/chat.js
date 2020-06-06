@@ -27,10 +27,16 @@ router.get('/check/:participant1/:participant2',
   });
 
 router.get('/chats',
+  sessionController.isLoggedIn,
+  chatController.hasChat,
   chatController.getChats,
   chatController.getParticipants,
   (req, res) => {
-    res.json({ messages: res.locals.messages, participants: res.locals.participants });
+    if (res.locals.session === true && res.locals.chat === true) {
+      res.json({ messages: res.locals.messages, participants: res.locals.participants });
+    } else {
+      res.redirect('/notauthorized');
+    }
   });
 
 router.post('/postmessage',

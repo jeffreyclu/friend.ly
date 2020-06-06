@@ -4,7 +4,10 @@
 }
 
 div.settingsForm {
-  margin: 6rem 0 10rem;
+  @media (min-width: 1000px) {
+    margin: 6rem 0 10rem;
+  };
+  margin: 20rem 0 10rem;
   padding: 0 0 10rem;
   animation: appear 1s 1;
   font-family: $mainFont;

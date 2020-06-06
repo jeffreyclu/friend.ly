@@ -16,8 +16,7 @@ class SignupContainer extends Component {
     this.state = {
       loginToggle: false,
       signupFull: false,
-      validatedSignupForm: false,
-      validateWarning: false,
+      signupWarning: undefined,
       newUser: {
         name: undefined,
         age: undefined,
@@ -32,6 +31,7 @@ class SignupContainer extends Component {
         password: undefined,
       },
       loginMessage: undefined,
+      totalUsers: 0,
     };
     this.focusDiv = React.createRef();
 
@@ -41,6 +41,21 @@ class SignupContainer extends Component {
     this.setLogin = this.setLogin.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.scrollToAbout = this.scrollToAbout.bind(this);
+  }
+
+  componentDidMount() {
+    const promises = [];
+    let totalUsers = 0;
+    const promise1 = fetch('/api/getusers')
+      .then((resp) => resp.json())
+      .then((data) => {
+        totalUsers = data;
+      });
+    promises.push(promise1);
+    Promise.all(promises)
+      .then(() => {
+        this.setState(() => ({ totalUsers }));
+      });
   }
 
   setNewUser(e) {
@@ -70,62 +85,78 @@ class SignupContainer extends Component {
   }
 
   toggleSignupFull() {
-    this.setState((prevState) => {
-      let {
-        signupFull, validatedSignupForm, validateWarning, newUser,
-      } = prevState;
-      if (!Object.values(newUser).some((val) => val === undefined)) {
-        validatedSignupForm = true;
-        if (signupFull && validatedSignupForm) {
-          newUser.username = newUser.username.toLowerCase();
-          fetch('/api/adduser', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(newUser),
-          })
-            .then((resp) => resp.json())
-            .then((data) => {
-              if (data === true) {
-                window.location.href = '/dashboard';
-              } else {
-                alert('Error, user already exists'); // TODO fix error message handling
-              }
-            });
-        }
-      } else if (signupFull && Object.values(newUser).some((val) => val === undefined)) {
-        validateWarning = true;
-      }
-      signupFull = true;
-      return { signupFull, validatedSignupForm, validateWarning };
-    });
-  }
-
-  handleLogin() {
-    this.setState((prevState) => {
-      let { loginValues, loginMessage } = prevState;
-      if (loginValues.username && loginValues.password) {
-        loginValues.username = loginValues.username.toLowerCase();
-        fetch('/login', {
+    let { signupFull, signupWarning, newUser } = this.state;
+    const promises = [];
+    if (!Object.values(newUser).some((val) => val === undefined)) {
+      const validatedSignupForm = true;
+      if (signupFull && validatedSignupForm) {
+        newUser.username = newUser.username.toLowerCase();
+        const promise1 = fetch('/api/adduser', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(loginValues),
+          body: JSON.stringify(newUser),
         })
           .then((resp) => resp.json())
           .then((data) => {
-            if (data.result.message === 'user found') {
-              window.location.href = '/dashboard';
+            if (data === true) {
+              signupWarning = 'Success!';
+            } else {
+              signupWarning = 'Sorry, that username is already taken!';
             }
           });
+        promises.push(promise1);
       }
-      else {
-        loginMessage = 'Error, please try again.'; // TODO fix login error message handling
-      }
-      return { loginMessage };
-    });
+    } else if (signupFull && Object.values(newUser).some((val) => val === undefined)) {
+      signupWarning = 'Error: all fields must be filled out.';
+    }
+    signupFull = true;
+    Promise.all(promises)
+      .then(() => {
+        this.setState(() => {
+          if (signupWarning === 'Success!') window.setTimeout(() => window.location.href='/dashboard', 1000);
+          return { signupFull, signupWarning };
+        });
+      });
+  }
+
+  handleLogin() {
+    const { loginValues } = this.state;
+    let loginMessage
+    let redirect = false;
+    const promises = [];
+    if (loginValues.username && loginValues.password) {
+      loginValues.username = loginValues.username.toLowerCase();
+      const promise1 = fetch('/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loginValues),
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          if (data.result.message === 'user found') {
+            redirect = true;
+            loginMessage = 'Success!';
+          } else if (data.result.message === 'user not found') {
+            loginMessage = 'Error, username does not exist.';
+          } else if (data.result.message === 'incorrect password') {
+            loginMessage = 'Error, wrong password.';
+          }
+        });
+      promises.push(promise1);
+    } else {
+      loginMessage = 'Error, all fields must be filled out.'; // TODO fix login error message handling
+    }
+    Promise.all(promises)
+      .then(() => {
+        if (redirect === true) window.setTimeout(() => window.location.href = '/dashboard', 1000);
+        this.setState(() => {
+          return { loginMessage };
+        });
+      });
   }
 
   scrollToAbout() {
@@ -158,12 +189,13 @@ class SignupContainer extends Component {
               toggleSignupFull={this.toggleSignupFull}
               signupFull={this.state.signupFull}
               setNewUser={this.setNewUser}
-              validateWarning={this.state.validateWarning}
+              signupWarning={this.state.signupWarning}
             />
           )}
         </div>
         <AboutSection
           focusDiv={this.focusDiv}
+          totalUsers={this.state.totalUsers}
         />
         <Footer />
       </>

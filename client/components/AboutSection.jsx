@@ -4,7 +4,7 @@
 
 import React from 'react';
 
-const AboutSection = ({ focusDiv }) => {
+const AboutSection = ({ focusDiv, totalUsers }) => {
   return (
     <div id="about" ref={focusDiv}>
       <h2>About Friend.ly</h2>
@@ -14,6 +14,8 @@ const AboutSection = ({ focusDiv }) => {
         whose interest matches yours.
       </p>
       <p>Friend.ly is currently free to use, so sign on up!</p>
+      <br />
+      <h4>{totalUsers} total users and counting.</h4>
     </div>
   );
 };

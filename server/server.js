@@ -93,10 +93,10 @@ app.get(
   },
 );
 
-app.get('/addFake',
-  (req, res) => {
-    res.sendFile(path.join(__dirname, '../addFake.html'));
-  });
+// app.get('/addFake',
+//   (req, res) => {
+//     res.sendFile(path.join(__dirname, '../addFake.html'));
+//   });
 
 app.get('/notauthorized',
   (req, res) => {

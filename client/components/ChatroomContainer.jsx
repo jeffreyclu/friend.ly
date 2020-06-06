@@ -64,25 +64,29 @@ class ChatroomContainer extends Component {
   }
 
   sendMessage() {
-    this.setState((prevState) => {
-      const { message, sender } = prevState.newMessage;
-      let messages = [];
-      if (message !== '') {
-        fetch('/chatroom/postmessage',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ message, sender }),
-          })
-          .then((resp) => resp.json())
-          .then((data) => {
-            messages = data;
-            return { messages };
-          });
-      }
-    });
+    const { message } = this.state.newMessage;
+    const { sender } = this.state.newMessage;
+    const promises = [];
+    let messages = [];
+    if (message !== '') {
+      const promise1 = fetch('/chatroom/postmessage',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message, sender }),
+        })
+        .then((resp) => resp.json())
+        .then((data) => {
+          messages = data;
+        });
+      promises.push(promise1);
+    }
+    Promise.all(promises)
+      .then(() => {
+        this.setState(() => ({ messages }));
+      });
   }
 
   render() {

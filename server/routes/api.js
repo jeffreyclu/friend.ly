@@ -7,9 +7,10 @@ const chatController = require('../controllers/chatController');
 const router = express.Router();
 
 router.get('/getusers',
-  sessionController.isLoggedIn,
   usersController.getUsers,
-  (req, res) => res.json(res.locals.users));
+  (req, res) => {
+    res.json(res.locals.users);
+  });
 
 router.post('/adduser',
   usersController.checkUsername,

@@ -42,31 +42,32 @@ class SettingsContainer extends Component {
   }
 
   handleSettingsChange() {
-    this.setState((prevState) => {
-      let { user, newUser, status } = prevState;
-      if (user && newUser.city && newUser.primary_interest) {
-        fetch('/api/edituser', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ user, newUser }),
-        })
-          .then((resp) => resp.json())
-          .then((data) => {
-            if (data.message === 'success') window.location.href = '/dashboard';
-            newUser = {
-              city: '',
-              primary_interest: 'Live Music',
-            };
-            status = 'Success!';
-            return { newUser };
-          });
-      } else {
-        status = 'Error, all fields must be filled in';
-        return { status };
-      }
-    });
+    let { user, newUser, status } = this.state;
+    const promises = [];
+    if (user && newUser.city && newUser.primary_interest) {
+      const promise1 = fetch('/api/edituser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ user, newUser }),
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          if (data.message === 'success') status = 'Success!';
+          else status = 'An error occurred, please try again later.';
+        });
+      promises.push(promise1);
+    } else {
+      status = 'Error, all fields must be filled in';
+    }
+    Promise.all(promises)
+      .then(() => {
+        this.setState(() => {
+          if (status === 'Success!') setTimeout(() => window.location.href='/dashboard', 1000);
+          return { status, newUser };
+        });
+      });
   }
 
   render() {

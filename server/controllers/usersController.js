@@ -7,17 +7,13 @@ const Chat = require('../models/chatModel');
 const usersController = {};
 
 usersController.getUsers = (req, res, next) => {
-  if (res.locals.session === true) {
-    User.find()
-      .exec()
-      .then((resp) => {
-        res.locals.users = resp;
-        next();
-      })
-      .catch(next);
-  } else {
-    next(); // TODO add "please login" page
-  }
+  User.count()
+    .exec()
+    .then((resp) => {
+      res.locals.users = resp;
+      next();
+    })
+    .catch(next);
 };
 
 usersController.addUser = (req, res, next) => {
@@ -195,7 +191,6 @@ usersController.checkForMatch = (req, res, next) => {
     .then((resp) => {
       if (resp.matchedUsers.length > 0) {
         resp.matchedUsers.forEach((match) => {
-          console.log(match._id, res.locals.currentUser._id)
           if (JSON.stringify(match._id) === JSON.stringify(res.locals.currentUser._id)) {
             res.locals.result = { message: "matched" };
             const participants = [match._id, req.body._id];

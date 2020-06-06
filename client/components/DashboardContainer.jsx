@@ -29,7 +29,6 @@ class DashboardContainer extends Component {
     const promise1 = fetch('/checklogin')
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, 'data1')
         user = data.currentUser;
         potentialMatches = user.potentialMatches;
         matchedUsers = user.matchedUsers;
@@ -39,7 +38,6 @@ class DashboardContainer extends Component {
     const promise2 = fetch('/api/getpotentials')
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, 'data2')
         if (Array.isArray(data.potentialMatches)) potentialMatches = data.potentialMatches;
         fetchedUsers = true;
       });
@@ -53,76 +51,70 @@ class DashboardContainer extends Component {
   }
 
   meetUser() {
-    this.setState((prevState) => {
-      const { potentialMatches, matchedUsers } = prevState;
-      const desiredUser = potentialMatches.shift();
-      matchedUsers.push(desiredUser);
-      let idling = true;
-      const promises = [];
-      const promise1 = fetch('/api/addmatch', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(matchedUsers),
-      });
-      promises.push(promise1);
-      const promise2 = fetch('/api/syncpotentials', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(potentialMatches),
-      });
-      promises.push(promise2);
-      const promise3 = fetch('/api/checkformatch', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(desiredUser),
-      })
-        .then((resp) => resp.json())
-        .then((data) => {
-          if (data.message === 'matched') {
-            matchedUsers.forEach((match) => {
-              if (match._id === desiredUser._id) match.isMatched = true;
-            });
-          }
-        });
-      promises.push(promise3);
-      Promise.all(promises)
-        .then(() => {
-          this.setState(() => {
-            idling = false;
-            return { idling };
-          });
-        });
-      return { potentialMatches, matchedUsers, idling };
+    const { potentialMatches, matchedUsers } = this.state;
+    const desiredUser = potentialMatches.shift();
+    matchedUsers.push(desiredUser);
+    let idling = true;
+    const promises = [];
+    const promise1 = fetch('/api/addmatch', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(matchedUsers),
     });
+    promises.push(promise1);
+    const promise2 = fetch('/api/syncpotentials', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(potentialMatches),
+    });
+    promises.push(promise2);
+    const promise3 = fetch('/api/checkformatch', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(desiredUser),
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        if (data.message === 'matched') {
+          matchedUsers.forEach((match) => {
+            if (match._id === desiredUser._id) match.isMatched = true;
+          });
+        }
+      });
+    promises.push(promise3);
+    Promise.all(promises)
+      .then(() => {
+        this.setState(() => {
+          idling = false;
+          return { potentialMatches, matchedUsers, idling };
+        });
+      });
   }
 
   skipUser() {
-    this.setState((prevState) => {
-      const { potentialMatches } = prevState;
-      let idling = true;
-      potentialMatches.shift();
-      fetch('/api/syncpotentials', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(potentialMatches),
-      })
-        .then((resp) => resp.json())
-        .then(() => {
-          this.setState(() => {
-            idling = false;
-            return { idling };
-          });
+    const { potentialMatches } = this.state;
+    let idling = true;
+    potentialMatches.shift();
+    fetch('/api/syncpotentials', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(potentialMatches),
+    })
+      .then((resp) => resp.json())
+      .then(() => {
+        this.setState(() => {
+          idling = false;
+          return { potentialMatches, idling };
         });
-      return { potentialMatches, idling };
-    });
+      });
   }
 
   render() {

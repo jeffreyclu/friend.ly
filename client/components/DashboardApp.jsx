@@ -13,6 +13,7 @@ const DashboardApp = ({
   <div className="dashboard">
     <h3>
       Welcome
+      {' '}
       {user.name}
     </h3>
     {

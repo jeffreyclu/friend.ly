@@ -18,14 +18,18 @@ div.chatroom {
         flex-flow: column nowrap;
         align-items: flex-start;
         justify-content: flex-start;
-        height: 50vh;
         @media (min-width: 1200px) {
             width: 30vw;
-            height: 30vh;
+            height: 20vh;
+        };
+        @media (min-width: 1000px) {
+            width: 60vw;
+            height: 20vh;
         };
         width: 60vw;
+        height: 50vh;
         padding: 2rem;
-        border: 1px solid $lightgrey;
+        // border: 1px solid $lightgrey;
         border-radius: 1rem;
         overflow-y: auto;
     }
@@ -81,6 +85,9 @@ div.chatroom {
             border-bottom: 1px solid $pear;
             font-size: $signupLabelFontSize;
             outline: none;
+            @media (min-width: 1000px) {
+                width: 60vw;
+            };
             @media (min-width: 1200px) {
                 width: 30vw;
             };

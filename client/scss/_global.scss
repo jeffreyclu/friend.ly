@@ -122,7 +122,10 @@ span.subtitle {
 }
 
 div.form {
-  margin-top: 6rem;
+  @media (min-width: 1000px) {
+    margin-top: 6rem;
+  }
+  margin-top: 20rem;
   animation: appear 1s 1;
   font-family: $mainFont;
   display: flex;
