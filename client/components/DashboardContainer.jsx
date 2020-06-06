@@ -51,6 +51,10 @@ class DashboardContainer extends Component {
   }
 
   meetUser() {
+    this.setState(() => {
+      let idling = true;
+      return { idling };
+    });
     const { potentialMatches, matchedUsers } = this.state;
     const desiredUser = potentialMatches.shift();
     matchedUsers.push(desiredUser);
@@ -98,6 +102,10 @@ class DashboardContainer extends Component {
   }
 
   skipUser() {
+    this.setState(() => {
+      let idling = true;
+      return { idling };
+    });
     const { potentialMatches } = this.state;
     let idling = true;
     potentialMatches.shift();

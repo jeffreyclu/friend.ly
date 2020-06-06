@@ -72,7 +72,7 @@ div.chatroom {
         margin: 4rem 0 0;
         border: 1px solid $lightgrey;
         border-radius: 1rem;
-        @media (min-width: 1200px) {
+        @media (min-width: 1000px) {
             width: 30vw;
         };
         width: 60vw;
@@ -85,10 +85,10 @@ div.chatroom {
             border-bottom: 1px solid $pear;
             font-size: $signupLabelFontSize;
             outline: none;
-            @media (min-width: 1000px) {
+            @media (min-width: 1200px) {
                 width: 60vw;
             };
-            @media (min-width: 1200px) {
+            @media (min-width: 1000px) {
                 width: 30vw;
             };
             width: 60vw;
