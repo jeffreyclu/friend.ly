@@ -12,10 +12,13 @@ class ChatroomContainer extends Component {
     super(props);
     this.state = {
       participants: [],
+      events: [],
+      totalEvents: undefined,
       messages: [],
       user: {},
       newMessage: {},
       fetchedChats: false,
+      fetchedEvents: false,
     };
     this.setNewMessage = this.setNewMessage.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -23,15 +26,24 @@ class ChatroomContainer extends Component {
 
   componentDidMount() {
     const promises = [];
-    let user = {};
+    let { user, events, totalEvents, fetchedEvents } = this.state;
     const promise1 = fetch('/checklogin')
       .then((res) => res.json())
       .then((data) => {
         user = data.currentUser;
       });
     promises.push(promise1);
+    const promise2 = fetch('/event')
+      .then((res) => res.json())
+      .then((data) => {
+        events = data.events.event;
+        console.log(events);
+        totalEvents = data.total_items;
+        fetchedEvents = true;
+      });
+    promises.push(promise2);
     Promise.all(promises)
-      .then(() => this.setState(() => ({ user })));
+      .then(() => this.setState(() => ({ user, events, totalEvents, fetchedEvents })));
   }
 
   componentDidUpdate() {
@@ -102,6 +114,8 @@ class ChatroomContainer extends Component {
                 setNewMessage={this.setNewMessage}
                 sendMessage={this.sendMessage}
                 user={this.state.user}
+                events={this.state.events}
+                totalEvents={this.state.totalEvents}
               />
             )
             : <h3>Loading...</h3>

@@ -1,0 +1,38 @@
+div.events {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  line-height: 6rem;
+  height: 60vh;
+  overflow-y: scroll;
+  margin: 3rem 10rem 0;
+  // border-left: 1px solid $tundora;
+  // background-color: $tundora;
+  span {
+    font-size: $smallerFontSize;
+  }
+  div.eventslist {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: $smallestFontSize;
+    div.event {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      line-height: 1.25rem;
+      margin: 1rem;
+      span {
+        font-size: 1rem;
+        color: $lightgrey;
+      }
+      img {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+  }
+}

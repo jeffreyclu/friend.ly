@@ -10,6 +10,7 @@ const chatController = require('./controllers/chatController');
 
 const apiRouter = require('./routes/api');
 const chatRouter = require('./routes/chat');
+const eventRouter = require('./routes/event');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,6 +24,7 @@ app.use('/build', express.static(path.join(__dirname, '../build')));
 app.use('/client', express.static(path.join(__dirname, '../client')));
 app.use('/api', apiRouter);
 app.use('/chatroom', chatRouter);
+app.use('/event', eventRouter);
 
 app.get(
   '/',
