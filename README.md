@@ -1,5 +1,3 @@
-#friend.ly
-
 friend.ly is an app to help people make new Event Buddies.
 
 What is an Event Buddy?
